@@ -1,0 +1,62 @@
+.card {
+    width: 12rem;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    border-radius: .5rem;
+    padding: 1rem;
+    height: 17rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    color: black;
+
+    p {
+        font-size: 1rem;
+        line-height: 1.2rem;
+        margin-top: 1rem;
+        color: gray
+    }
+
+    &__figure {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        height: 5rem;
+        width: 5rem;
+        border-radius: 50%;
+        background-color: #9E2479;
+        margin-bottom: 1.3rem;
+
+        .car__icon {
+            font-size: 2rem;
+            color: #fff;
+
+
+
+
+
+        }
+    }
+
+    &:hover {
+        background-color: #9E2479;
+
+        &:hover figure {
+            background-color: #fff;
+        }
+
+        &:hover p,
+        h3 {
+            color: #fff;
+        }
+
+        &:hover .car__icon {
+            color: #9E2479;
+        }
+
+
+    }
+
+
+}

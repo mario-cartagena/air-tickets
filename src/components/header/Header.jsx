@@ -10,7 +10,6 @@ const Header = () => {
     <>
       <Navbar />
       <Outlet />
-
     </>
 
   )
