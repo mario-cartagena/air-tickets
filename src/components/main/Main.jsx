@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios';
+import MainPayMethods from './mainPayMethods/MainPayMethods';
 const URL = "https://tickets-backend.herokuapp.com/flights";
 const Main = () => {
   const getFlights = async() => {
@@ -12,7 +13,9 @@ const Main = () => {
   }
   getFlights();
   return (
-    <div>Main</div>
+    <main>
+      <MainPayMethods/>
+    </main>
   )
 }
 

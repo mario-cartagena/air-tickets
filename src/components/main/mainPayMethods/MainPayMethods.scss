@@ -1,0 +1,31 @@
+.main{
+    margin: 0 6.5rem;
+    &__title{
+        font-size: 36px;
+        line-height: 44px;
+    }
+    &__payment{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        border-radius: .5rem;
+        padding: 24px 32px 20px;
+    }
+    &__paymentCards{
+        display: flex;
+        gap: 32px;
+        justify-content: center;
+        align-items: center;
+    }
+    &__paymentCredit, &__paymentCash{
+        p, figure{
+            margin: 0;
+            font-size: 14px;
+            font-weight: 400;
+        }
+        figure{
+            padding: 20px 0 24px;
+        }       
+    }
+}
