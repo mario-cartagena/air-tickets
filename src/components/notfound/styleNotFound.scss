@@ -1,0 +1,47 @@
+@import '../../index.scss';
+
+.page__404 {
+    width: 100%;
+    background: #fff;
+    font-family: 'Arvo', serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 5rem;
+
+    & img {
+        width: 100%;
+
+    }
+
+    &Bg {
+
+        background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+        height: 400px;
+        background-position: center;
+        width: 800px;
+    }
+
+    &Bg h1 {
+        font-size: 80px;
+    }
+
+    &Bg h3 {
+        font-size: 80px;
+    }
+
+    &Link {
+        color: #fff !important;
+        list-style: none;
+        padding: 10px 20px;
+        background: $colorPrimary;
+        border-radius: 1rem;
+        margin: 20px 0;
+        display: inline-block;
+    }
+
+    &Box {
+        margin-top: -50px;
+    }
+}

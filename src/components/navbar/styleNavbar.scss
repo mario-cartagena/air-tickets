@@ -1,33 +1,32 @@
-nav {
+@import '../../index.scss';
+
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #9E2479;
-    color: #fff;
+    background-color: $colorPrimary;
+    color: $colorSecondary;
     padding: 1rem;
-    box-shadow: 0 8px 20px 0 #f5e8f1
-}
 
+&__button {
+    background-color: transparent;
+    border: 2px solid $colorSecondary;
+    border-radius: 18px;
+    padding: 6px 20px;
+    color: $colorSecondary;
+    cursor: pointer;
+        &:hover {
+        background-color: $colorSecondary;
+        color: $colorPrimary;
+    }
+}
 ul {
     display: flex;
     list-style: none;
 }
-
-.btn__link {
-    background-color: transparent;
-    border: 2px solid #fff;
-    border-radius: 18px;
-    padding: 6px 20px;
-    color: #fff;
-    cursor: pointer;
-
-    &:hover {
-        background-color: #f5e8f1;
-        color: #9E2479;
-    }
-}
-
 span {
     margin-left: 0.8rem;
     font-weight: 900;
 }
+}
+

@@ -1,3 +1,5 @@
+@import '../../index.scss';
+
 .card {
     width: 12rem;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -9,7 +11,6 @@
     text-align: center;
     align-items: center;
     color: black;
-
     p {
         font-size: 1rem;
         line-height: 1.2rem;
@@ -25,38 +26,29 @@
         height: 5rem;
         width: 5rem;
         border-radius: 50%;
-        background-color: #9E2479;
+        background-color: $colorPrimary;
         margin-bottom: 1.3rem;
 
         .car__icon {
             font-size: 2rem;
-            color: #fff;
-
-
-
-
+            color: $colorSecondary;
 
         }
     }
 
     &:hover {
-        background-color: #9E2479;
-
-        &:hover figure {
-            background-color: #fff;
+        background-color: $colorPrimary;
+        figure {
+            background-color: $colorSecondary;
         }
-
-        &:hover p,
+        p,
         h3 {
-            color: #fff;
+            color: $colorSecondary;
         }
-
-        &:hover .car__icon {
-            color: #9E2479;
+        .car__icon {
+            color: $colorPrimary;
         }
-
 
     }
-
 
 }

@@ -8,7 +8,7 @@ import { Outlet } from 'react-router-dom'
 const Header = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Outlet />
     </>
 
