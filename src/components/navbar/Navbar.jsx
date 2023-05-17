@@ -6,20 +6,17 @@ import { faPlaneDeparture } from '@fortawesome/free-solid-svg-icons';
 
 function Navbar() {
   return (
-    <nav>
-      <div>
+    <nav className='navbar'>
+      <div className='navbar__logo'>
         <span>AIRTICKETS</span>
         <span><FontAwesomeIcon icon={faPlaneDeparture} style={{ color: "#f9fafb", }} /></span>
       </div>
-
       <ul>
         <li>
-          <button className='btn__link'>
+          <button className='navbar__button'>
             LogIn
           </button>
-
         </li>
-
       </ul>
     </nav>
   )
