@@ -9,6 +9,14 @@
     border-radius: 1rem;
     height: 320px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    // position: absolute;
+    // top: 16rem;
+    // right: 41.5rem;
+    position: absolute;
+    top: 0%;
+    left: 105%;
+    z-index: 999;
+  
     &__label {
         display: flex;
         justify-content: space-between;

@@ -1,0 +1,44 @@
+@import '../../index.scss';
+
+@mixin quantity-button {
+    min-width: 47px;
+    min-height: 48px;
+    outline: 0;
+    font-size: 30px;
+    color: $colorPrimary;
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
+    border: 1px solid gray;
+}
+
+.container {
+    display: block;
+    &__row {
+        display: flex;
+        width: auto;
+        margin-top: 1rem;
+    }
+
+    &__categories {
+        width: 100px;
+    }
+
+    &__quantity {
+        display: flex;
+
+        p {
+            @include quantity-button;
+        }
+    }
+
+    &__quantity--decrement {
+        @include quantity-button;
+        border-radius: 6px 0 0 6px;
+    }
+
+    &__quantity--increment {
+        @include quantity-button;
+        border-radius: 0 6px 6px 0;
+    }
+}
