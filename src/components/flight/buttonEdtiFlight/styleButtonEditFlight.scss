@@ -1,0 +1,18 @@
+@import '../../../index.scss';
+
+.btn__edit{
+    cursor: pointer;
+    background: rgba(255,255,255,.02);;
+    color: $colorPrimary;
+    border: 1px solid $colorPrimary;
+    border-radius: 20px;
+    padding: 7px 18px;
+    max-height: 40px;
+    span{
+        font-size: 15px;
+    }
+}
+.btn__edit:hover{
+    background-color: $colorPrimary;
+    color: #FFFF;
+}
