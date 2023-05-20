@@ -15,9 +15,7 @@ const AppRouter = () => {
         <Route path={"/"} exact element={<Layout />}>
           <Route index element={<App/>} />
           <Route path={"fligth"} element={<MainServices />} />
-          <Route path={"seats"} element={<MainServices />} />
-          <Route path={"payment"} element={<MainServices />} />
-          <Route path={"fligthdetails"} element={<MainServices />} />
+
         </Route>
         <Route path="*" element={<NotFound />} /> 
       </Routes>

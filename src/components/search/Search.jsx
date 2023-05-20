@@ -88,14 +88,18 @@ function Search() {
     </div>
 
     <div className='container__search__passenger'>
-    <MultipleSelect/>
+      <div className='container__searchQuantiy'>
+    <MultipleSelect className='container__search__quantity'/>
       {/* <div className='container__search__quantity'>
         <label>Pasajeros</label>
         
       </div> */}
       {/* <div className='container__search__coupon'>
       </div> */}
+      </div>
+      <div className='container__serchCoupon'>
       <CouponDiscount className='container__search__coupon'/>
+      </div>
     </div>
     <div className='container__search__button'>
       <button className='container__search__btn'><span><FontAwesomeIcon icon={faPlane} /></span><p  className='container__search__btn__plane'>Buscar vuelos</p></button>

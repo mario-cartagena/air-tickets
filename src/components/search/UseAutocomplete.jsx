@@ -109,7 +109,7 @@ export default function UseAutocomplete({closeModal}) {
     <div className='main__selectAirport'>
       <div {...getRootProps()}>
       <div className='main__selectAirport__label'> <Label {...getInputLabelProps()} className='main__selectAirport__label'>¿A dónde viajas?</Label>  <span onClick={closeModal}><FontAwesomeIcon icon={faXmark} className='car__icon' /></span></div>
-        <div  style={{ width:'320px', padding:'10px', borderRadius:'12px 12px 0px 0px',  border: '1px solid rgba(0,0,0,.25)' }}>
+        <div className='main__selectAirport__body'>
         <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: 'dark', fontSize: '1rem', marginRight:'.5rem' }}/>
         <Input {...getInputProps()} style={{ border:'0px solid', outline: 'none' }} placeholder='Buscar aeropuerto de salida' />
         </div>
