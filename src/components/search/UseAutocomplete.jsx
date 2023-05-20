@@ -4,10 +4,8 @@ import { styled } from '@mui/system';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styleSelectAirport.scss'
-import { getFlights } from '../../services/getAirports';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-
-
+import { GetFlights } from '../../services/GetFlights';
 
 const Label = styled('label')({
   display: 'block',
@@ -62,7 +60,7 @@ export default function UseAutocomplete({closeModal}) {
   const [flights, setFlights] = useState([]);
 
   useEffect(() => {
-    getFlights()
+    GetFlights()
       .then((response) => {
         if (!flights.length) {
           setFlights(response);

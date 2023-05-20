@@ -1,0 +1,24 @@
+@import '../../index.scss';
+
+
+.container__ppl {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    width: 450px;
+    padding: 1rem;
+    background-color: $colorBackground;
+    p {
+        text-align: center;
+    }
+    &__leters {
+        flex-direction: row;
+    }
+
+}
+
+/*********************Media Query***************************/
+
+@media (max-width: 658px) {
+
+}
