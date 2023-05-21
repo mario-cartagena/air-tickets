@@ -7,6 +7,8 @@ import './styleSelectAirport.scss'
 import { getFlights } from '../../services/getAirports';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
+
+
 const Label = styled('label')({
   display: 'block',
 });
@@ -27,10 +29,10 @@ const Listbox = styled('ul')(({ theme }) => ({
   listStyle: 'none',
   backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#000',
   overflowY: 'auto',
-  maxHeight: '220px',
-  borderRadius: '0px 0px 12px 12px',
+  maxHeight: '200px',
+  borderRadius: '0px 0px 8px 8px',
   border: '1px solid rgba(0,0,0,.25)',
-  top: '155px',
+  top: '107px',
   '& li.Mui-focused': {
     backgroundColor: '#4a8df6',
     color: 'white',
@@ -54,7 +56,9 @@ const Listbox = styled('ul')(({ theme }) => ({
   },
 }));
 
-export default function UseAutocomplete() {
+
+export default function UseAutocomplete({closeModal}) {
+
   const [flights, setFlights] = useState([]);
 
   useEffect(() => {
@@ -93,26 +97,27 @@ export default function UseAutocomplete() {
 
     console.log(getInputProps().value)
 
-    const [isDropdownOpen, setDropdownOpen] = useState(true);
+    // const [isDropdownOpen, setDropdownOpen] = useState(false);
 
-    const handleClose = () => {
-      setDropdownOpen(false);
-    };
+    // const handleClose = () => {
+    //   console.log('soy cierre')
+    //   setDropdownOpen(!isDropdownOpen);
+    // };
+
    
   return (
     <div className='main__selectAirport'>
       <div {...getRootProps()}>
-      <div className='main__selectAirport__label'> <Label {...getInputLabelProps()} className='main__selectAirport__label'>¿A dónde viajas?</Label>  <span onClick={handleClose}><FontAwesomeIcon icon={faXmark} className='car__icon' /></span></div>
-        <div  style={{ width:'320px', padding:'10px', borderRadius:'12px 12px 0px 0px',  border: '1px solid rgba(0,0,0,.25)' }}>
+      <div className='main__selectAirport__label'> <Label {...getInputLabelProps()} className='main__selectAirport__label'>¿A dónde viajas?</Label>  <span onClick={closeModal}><FontAwesomeIcon icon={faXmark} className='car__icon' /></span></div>
+        <div className='main__selectAirport__body'>
         <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: 'dark', fontSize: '1rem', marginRight:'.5rem' }}/>
-    
         <Input {...getInputProps()} style={{ border:'0px solid', outline: 'none' }} placeholder='Buscar aeropuerto de salida' />
         </div>
       </div>
       {groupedOptions.length > 0 ? (
         <Listbox {...getListboxProps()}>
           {groupedOptions.map((option, index) => (
-            <li {...getOptionProps({ option, index })} style={{ display:'flex', justifyContent:'space-between' }}> <div>{option.title}</div> {option.code}</li>
+            <li {...getOptionProps({ option, index })} style={{ display:'flex', justifyContent:'space-between', borderTop:'1px solid #e6e6e6', textAlign:'left', height:'40px', padding:'0 8px', alignItems:'center'}}> <div>{option.title}</div> {option.code}</li>
           ))}
         </Listbox>
       ) : null}
