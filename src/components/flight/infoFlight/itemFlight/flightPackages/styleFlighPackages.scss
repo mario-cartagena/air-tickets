@@ -1,0 +1,23 @@
+@import '../../../../../index.scss';
+.baggage{
+    display: flex;
+    gap: 10px;
+    &__personal, &__hand, &__25k{
+        border: 0.5px solid #afafaf;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        gap: 4px;
+        cursor: pointer;
+        width: 100%;
+    }
+    &__personal:hover, &__hand:hover, &__25k:hover{
+        color: #FFFF;
+        background: $colorPrimary;
+    }
+    &__price{
+        font-weight: bold;
+    }
+}

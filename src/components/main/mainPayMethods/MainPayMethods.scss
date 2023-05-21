@@ -1,8 +1,10 @@
-.main{
-    margin: 0 6.5rem;
+.paymethods{
+    width: 81%;
+    margin: 0 auto;
     &__title{
         font-size: 36px;
         line-height: 44px;
+        margin-bottom: 24px;
     }
     &__payment{
         display: flex;
@@ -14,15 +16,16 @@
     }
     &__paymentCards{
         display: flex;
-        gap: 32px;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
     }
     &__paymentCredit, &__paymentCash{
         p, figure{
             margin: 0;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 400;
+            line-height: 17px;
         }
         figure{
             padding: 20px 0 24px;
