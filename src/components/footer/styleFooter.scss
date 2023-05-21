@@ -1,5 +1,5 @@
 .footer {
-  margin-top: 2rem;
+  margin-top: 4rem;
   background-color: #080206;
   color: white;
   padding: 20px;
@@ -10,7 +10,7 @@
   a {
     color: white;
     text-decoration: none;
-    margin-right: 20px;
+    margin-right: 15px;
   }
   a:last-child {
     color: white;
@@ -19,5 +19,10 @@
   img {
     vertical-align: middle;
     margin-right: 5px;
+  }
+  &__social{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
