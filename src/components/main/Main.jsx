@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios';
+import './styleMain.scss'
 import MainPayMethods from './mainPayMethods/MainPayMethods';
 import MainServices from '../mainServices/MainServices';
 import Search from '../search/Search';
@@ -18,7 +19,7 @@ const Main = () => {
   // getFlights();
 
   return (
-    <main>
+    <main className='main'>
       <Search/>
       <MainPayMethods/>
       <MainServices />

@@ -1,0 +1,12 @@
+.item__flight{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    background: #fff;
+    border-radius: .5rem;
+    max-width: 100%;
+    display: flex;
+    // justify-content: space-between;
+    padding: 1.5rem;    
+    gap: 3rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
