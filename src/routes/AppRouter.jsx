@@ -4,8 +4,9 @@ import Layout from "../components/layout/Layout";
 import App from "../components/app/App";
 import MainServices from '../components/mainServices/MainServices';
 import NotFound from '../components/notfound/NotFound';
+import MainSeats from '../components/mainSeats/MainSeats';
+import { Payment } from '@mui/icons-material';
 import Flight from '../components/flight/Flight';
-
 
 const AppRouter = () => {
     
@@ -16,8 +17,8 @@ const AppRouter = () => {
         <Route path={"/"} exact element={<Layout />}>
           <Route index element={<App/>} />
           <Route path={"flight"} element={<Flight />} />
-          <Route path={"seats"} element={<MainServices />} />
-          <Route path={"payment"} element={<MainServices />} />
+          <Route path={"seats"} element={<MainSeats />} />
+          <Route path={"payment"} element={<Payment />} />
           <Route path={"fligthdetails"} element={<MainServices />} />
         </Route>
         <Route path="*" element={<NotFound />} /> 

@@ -2,6 +2,7 @@
 $typografyFont: 'Lato', sans-serif;
 $colorPrimary: #A12985;
 $colorSecondary: #fff;
+$colorBackground: #f0f0f0;
 
 
 * {
@@ -10,6 +11,7 @@ $colorSecondary: #fff;
     box-sizing: border-box;
     font-family: $typografyFont;
 }
+
 // body{
 //     background: #f0f0f0;
 // }

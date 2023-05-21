@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from 'react';
-import { useTheme } from '@mui/material/styles';
+import React, { useState} from 'react';
+// import { useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
+// import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import QuantityPassengers from '../quantityPassengers/QuantityPassengers';
@@ -19,44 +19,44 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
+// const names = [
+//   'Oliver Hansen',
+//   'Van Henry',
+//   'April Tucker',
+//   'Ralph Hubbard',
+//   'Omar Alexander',
+//   'Carlos Abbott',
+//   'Miriam Wagner',
+//   'Bradley Wilkerson',
+//   'Virginia Andrews',
+//   'Kelly Snyder',
+// ];
 
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
+// function getStyles(name, personName, theme) {
+//   return {
+//     fontWeight:
+//       personName.indexOf(name) === -1
+//         ? theme.typography.fontWeightRegular
+//         : theme.typography.fontWeightMedium,
+//   };
+// }
 
 export default function MultipleSelect() {
-  const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
-  const [quantitySelectedAdult, setQuantitySelectedAdult] = React.useState(0)
-  const [quantitySelectedNiños, setQuantitySelectedNiños] = React.useState(0)
-  const [quantitySelectedBebes, setQuantitySelectedBebes] = React.useState(0)
+  // const theme = useTheme();
+  // const [personName, setPersonName] = useState([]);
+  const [quantitySelectedAdult, setQuantitySelectedAdult] = useState(0)
+  const [quantitySelectedNiños, setQuantitySelectedNiños] = useState(0)
+  const [quantitySelectedBebes, setQuantitySelectedBebes] = useState(0)
 
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
+  // const handleChange = (event) => {
+  //   const {
+  //     target: { value },
+  //   } = event;
+  //   setPersonName(
+  //     // On autofill we get a stringified value.
+  //     typeof value === 'string' ? value.split(',') : value,
+  //   );
+  // };
   console.log(quantitySelectedAdult + 1);
 
 

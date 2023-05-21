@@ -3,7 +3,7 @@ const URL = "https://tickets-backend.herokuapp.com/";
 
 const endpointFlights = "flights";
 
-export const getFlights = async () => {
+export const GetFlights = async () => {
     try {
 
         const { data } = await axios.get(`${URL}${endpointFlights}`);
@@ -15,4 +15,4 @@ export const getFlights = async () => {
     }
 }
 
-getFlights()
+GetFlights()
