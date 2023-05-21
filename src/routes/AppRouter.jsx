@@ -5,6 +5,7 @@ import App from "../components/app/App";
 import MainServices from '../components/mainServices/MainServices';
 import NotFound from '../components/notfound/NotFound';
 import MainSeats from '../components/mainSeats/MainSeats';
+import { Payment } from '@mui/icons-material';
 
 
 const AppRouter = () => {
@@ -17,6 +18,7 @@ const AppRouter = () => {
           <Route index element={<App/>} />
           <Route path={"fligth"} element={<MainServices />} />
           <Route path={"seats"} element={<MainSeats />} />
+          <Route path={"payment"} element={<Payment />} />
         </Route>
         <Route path="*" element={<NotFound />} /> 
       </Routes>
