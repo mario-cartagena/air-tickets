@@ -52,21 +52,34 @@ const RowSeats = ({ number }) => {
 
     const handleSeatToSelected = (key) => {
         const seatStatus = seatStatuses[key];
+      
         if (seatStatus === 'available') {
+          const selectedSeat = Object.entries(seatStatuses).find(([_, status]) => status === 'selected');
+          if (selectedSeat) {
+            const prevSelectedSeatKey = selectedSeat[0];
+            setSeatStatuses((prevStatuses) => {
+              const updatedStatuses = { ...prevStatuses };
+              updatedStatuses[prevSelectedSeatKey] = 'available';
+              updatedStatuses[key] = 'selected';
+              return updatedStatuses;
+            });
+            console.log(`soy ${key} Estoy seleccionada`);
+          } else {
             setSeatStatuses((prevStatuses) => ({
-                ...prevStatuses,
-                [key]: 'selected',
+              ...prevStatuses,
+              [key]: 'selected',
             }));
             console.log(`soy ${key} Estoy seleccionada`);
+          }
         } else if (seatStatus === 'selected') {
-            setSeatStatuses((prevStatuses) => ({
-                ...prevStatuses,
-                [key]: 'available',
-            }));
-            console.log(`soy ${key} Estoy disponible`);
+          setSeatStatuses((prevStatuses) => ({
+            ...prevStatuses,
+            [key]: 'available',
+          }));
+          console.log(`soy ${key} Estoy disponible`);
         }
-    };
-
+      };
+      
     return (
         <>
             <div className='seat__container'>
