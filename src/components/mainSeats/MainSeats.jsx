@@ -7,6 +7,8 @@ import FlightReservation from '../flight/reservationDetails/flightReservation/Fl
 import FlightCost from '../flight/reservationDetails/flightCost/FlightCost'
 import FlightServices from '../flight/reservationDetails/aditionalServices/FlightServices'
 import ButtonSeats from '../flight/reservationDetails/buttonSeats/ButtonSeats'
+import FlightTUA from '../flight/reservationDetails/flightTUA/FlightTUA'
+import FlightTotal from '../flight/reservationDetails/flightTotal/FlightTotal'
 
 const MainSeats = () => {
   return (
@@ -23,6 +25,8 @@ const MainSeats = () => {
           <FlightReservation/>
           <FlightCost/>
           <FlightServices/>
+          <FlightTUA/>
+          <FlightTotal/>
           <ButtonSeats nameButton="Pagar con PayPal"/>
         </div>
       </div>
