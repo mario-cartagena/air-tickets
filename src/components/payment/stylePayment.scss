@@ -9,9 +9,20 @@
         flex-direction: column;
         width: 60%;
         gap: 1rem;
+        margin-bottom: 2.5rem;
         span{
             font-size: 15px;
             font-weight: bold;
+        }
+    }
+}
+@media (max-width: 917px) {
+    .booking{
+        width: 100%;
+    }
+    .payment{
+        &__information{
+            width: 100%;
         }
     }
 }

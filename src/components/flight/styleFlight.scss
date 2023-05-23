@@ -1,4 +1,4 @@
-.flight{
+.flights{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -12,7 +12,7 @@
 }
 
 @media (max-width: 1115px) {
-    .flight{
+    .flights{
         &__reservation{
             margin: 2.5rem auto;
             width: 90%;
@@ -21,7 +21,7 @@
 }
 
 @media (max-width: 850px) {
-    .flight{
+    .flights{
         &__reservation{
             width: 100%;
         }

@@ -5,12 +5,12 @@ import InfoFlight from './infoFlight/InfoFlight';
 
 const Flight = () => {
   return (
-    <div className='flight'>
-      <div className='flight__information'>
+    <div className='flights'>
+      <div className='flights__information'>
         <InfoFlight/>
         <InfoFlight/>
       </div>
-      <div className='flight__reservation'>
+      <div className='flights__reservation'>
           <ReservationDetails/>
       </div>
     </div>
