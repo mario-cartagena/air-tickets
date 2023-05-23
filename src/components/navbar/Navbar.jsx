@@ -3,13 +3,15 @@ import React from 'react'
 import './styleNavbar.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlaneDeparture } from '@fortawesome/free-solid-svg-icons';
+import logo from '../../assets/img/logoVoladores1.png'
 
 function Navbar() {
   return (
     <nav className='navbar'>
       <div className='navbar__logo'>
-        <span>AIRTICKETS</span>
-        <span><FontAwesomeIcon icon={faPlaneDeparture} style={{ color: "#f9fafb", }} /></span>
+        <img src={logo} alt="" />
+        {/* <span>AIRTICKETS</span>
+        <span><FontAwesomeIcon icon={faPlaneDeparture} style={{ color: "#f9fafb", }} /></span> */}
       </div>
       <ul>
         <li>

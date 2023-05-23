@@ -2,11 +2,12 @@ import React from 'react'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import App from "../components/app/App";
-import MainServices from '../components/mainServices/MainServices';
 import NotFound from '../components/notfound/NotFound';
 import MainSeats from '../components/mainSeats/MainSeats';
 import Flight from '../components/flight/Flight';
+import FlightDetails from '../components/flightDetails/FlightDetails';
 import Payment from '../components/payment/Payment';
+
 
 const AppRouter = () => {
     
@@ -19,7 +20,7 @@ const AppRouter = () => {
           <Route path={"flight"} element={<Flight />} />
           <Route path={"seats"} element={<MainSeats />} />
           <Route path={"payment"} element={<Payment />} />
-          <Route path={"fligthdetails"} element={<MainServices />} />
+          <Route path={"flightdetails"} element={<FlightDetails />} />
         </Route>
         <Route path="*" element={<NotFound />} /> 
       </Routes>
