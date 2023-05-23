@@ -5,8 +5,8 @@ import App from "../components/app/App";
 import MainServices from '../components/mainServices/MainServices';
 import NotFound from '../components/notfound/NotFound';
 import MainSeats from '../components/mainSeats/MainSeats';
-import { Payment } from '@mui/icons-material';
 import Flight from '../components/flight/Flight';
+import Payment from '../components/payment/Payment';
 
 const AppRouter = () => {
     

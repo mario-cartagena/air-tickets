@@ -1,0 +1,14 @@
+.total{
+    box-shadow: 0 0.13rem 0.5rem 0 rgba(0,0,0,.06), 0 0.06rem 0.13rem 0 rgba(0,0,0,.08);
+    border-radius: 12px;
+    background: #fff;
+    &__info{
+        padding: 22px 10px;
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+        color: #080206;
+        font-size: 16px;
+    }
+
+}

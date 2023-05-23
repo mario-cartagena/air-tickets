@@ -1,0 +1,17 @@
+.payment{
+    display: flex;
+    margin: 2.5rem auto;
+    width: 90%;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    &__information{
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        gap: 1rem;
+        span{
+            font-size: 15px;
+            font-weight: bold;
+        }
+    }
+}

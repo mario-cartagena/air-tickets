@@ -10,3 +10,20 @@
         gap: 4rem;
     }
 }
+
+@media (max-width: 1115px) {
+    .flight{
+        &__reservation{
+            margin: 2.5rem auto;
+            width: 90%;
+        }
+    }
+}
+
+@media (max-width: 850px) {
+    .flight{
+        &__reservation{
+            width: 100%;
+        }
+    }
+}
