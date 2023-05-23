@@ -167,12 +167,50 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     textAlign: 'justify',
-  }
+  },
+  tablePassenger: {
+    display: 'table',
+    width: '100%',
+    // borderStyle: 'solid',
+    // borderRadius: 6,
+    // borderWidth: 1,
+    // borderColor: '#000000',
+  },
+  tableRowPassenger: {
+    flexDirection: 'row',
+  },
+  tableCellHeaderPassenger: {
+    backgroundColor: '#A12985',
+    color: '#FFF',
+    borderRadius: '6px',
+    margin: 3,
+    padding: 3,
+    fontSize: 10,
+    display: 'flex',
+    alignItems: 'center',
+    width: '220px',
+
+  },
+  tableCellPassenger: {
+    backgroundColor: '#F0F0F0',
+    borderRadius: '6px',
+    fontSize: 8,
+    margin: 3,
+    padding: 5,
+    width: '220px',
+  },
 });
 
 const data = [
   ['N° Vuelo', 'Origen', 'Destino', 'Fecha de Salida', 'Hora', 'Fecha de Llegada', 'Hora',],
   ['00ABC', 'MEDELLIN', 'BOGOTA', '2023-05-22', '09:00', '2023-05-22', '12:00'],
+
+  // ... agregar más filas de datos aquí
+];
+
+const dataPassenger = [
+  ['Nombre de Pasajero', 'Documento de Identidad'],
+  ['Maria Antonieta Pereira', '5620369'],
 
   // ... agregar más filas de datos aquí
 ];
@@ -203,6 +241,19 @@ const BoardingPdf = () => {
           </View>
           <View style={styles.space}> </View>
           <Text style={styles.airline}>Información de tu viaje:</Text>
+
+          <View style={styles.tablePassenger}>
+            {dataPassenger.map((row, rowIndex) => (
+              <View key={rowIndex} style={styles.tableRowPassenger}>
+                {row.map((cell, cellIndex) => (
+                  <View key={cellIndex} style={rowIndex === 0 ? styles.tableCellHeaderPassenger : styles.tableCellPassenger}>
+                    <Text>{cell}</Text>
+                  </View>
+                ))}
+              </View>
+            ))}
+          </View>
+
           <View style={styles.table}>
             {data.map((row, rowIndex) => (
               <View key={rowIndex} style={styles.tableRow}>
@@ -252,16 +303,7 @@ const BoardingPdf = () => {
                 Aeronáuticos de Colombia:(i) Para las ventas efectuadas a través de métodos no tradicionales o a distancia a los cuales se refiere el Decreto 1499 de 2014,(ii) El
                 retracto deberá ser ejercido a través de cualquier canal de atención del vendedor, dentro de las cuarenta y ocho (48)horas corrientes siguientes a la operación de
                 la compra,(iii) El retracto sólo podrá ser ejercido con una anterioridad igual o mayor a ocho (8) días calendario entre el momento de su ejercicio oportuno y la
-                fecha prevista para el inicio de la prestación del servicio para operaciones nacionales. En caso de operaciones internacionales, el término será igual o mayor a
-                quince (15) días calendario, (iv) La retención que se hace al pasajero se efectuará a favor del transportador y será equivalente a sesenta mil pesos ($60.000)
-                para tiquetes nacionales o a cincuenta dólares estadounidenses (US$50) para tiquetes internacionales, aplicando la tasa de cambio oficial aprobada por el Banco
-                de la República para el día en que el pasajero comunique al transportador o agente de viajes su decisión de retractarse. En todo caso, el valor retenido no podrá
-                ser superior al diez por ciento (10%) del valor recibido por concepto de tarifa, excluyendo tasas, impuestos y tarifa administrativa, (v) La aerolínea o agente de
-                viajes que vendió el tiquete, deberá reembolsar el dinero al pasajero en un plazo máximo de treinta (30) días calendario a partir de la comunicación del retracto,
-                (vi) El pasajero tendrá derecho a la devolución de la tasa aeroportuaria. Se excluyen aquellas tasas, impuestos y o contribuciones que por regulación no sean
-                reembolsables, y (vii) Si el pasajero ejerce su derecho de retracto ante la agencia de viajes que realizó la venta del tiquete como intermediario, esta procederá a
-                reembolsar el dinero a que haya lugar, una vez la aerolínea ponga a su disposición el monto correspondiente, sin perjuicio del plazo de treinta (30) días previsto
-                en el inciso anterior para que el reembolso del dinero al pasajero se haga efectivo.
+                fecha prevista para el inicio de la prestación del servicio para operaciones nacionales.
               </Text>
             </Text>
           </View>
