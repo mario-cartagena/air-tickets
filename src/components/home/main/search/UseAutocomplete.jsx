@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styleSelectAirport.scss'
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { GetFlights } from '../../services/GetFlights';
+import { GetFlights } from '../../../../services/GetFlights';
 
 const Label = styled('label')({
   display: 'block',

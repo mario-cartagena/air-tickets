@@ -1,12 +1,12 @@
-import amex from "../../assets/img/paymentCards/amex.svg";
-import paypal from "../../assets/img/paymentCards/paypal.svg";
-import invex from "../../assets/img/paymentCards/invex.svg";
-import mastercard from "../../assets/img/paymentCards/mastercard.svg";
-import visa from "../../assets/img/paymentCards/visa.svg";
-import oxxo from "../../assets/img/paymentCash/oxxo.svg"
-import seven from "../../assets/img/paymentCash/seven.svg"
-import walmart from "../../assets/img/paymentCash/walmart.svg"
-import famaAhorro from "../../assets/img/paymentCash/famahorro.svg"
+import amex from "../assets/img/paymentCards/amex.svg";
+import paypal from "../assets/img/paymentCards/paypal.svg";
+import invex from "../assets/img/paymentCards/invex.svg";
+import mastercard from "../assets/img/paymentCards/mastercard.svg";
+import visa from "../assets/img/paymentCards/visa.svg";
+import oxxo from "../assets/img/paymentCash/oxxo.svg";
+import seven from "../assets/img/paymentCash/seven.svg";
+import walmart from "../assets/img/paymentCash/walmart.svg";
+import famaAhorro from "../assets/img/paymentCash/famahorro.svg";
 
 export const paymentCredit = [
     {id: 1, image: amex, alt: 'Logo Tarjeta de Crédito Amex'},

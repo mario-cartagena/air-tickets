@@ -1,6 +1,6 @@
 import React from 'react';
 import './MainPayMethods.scss'
-import {paymentCredit, paymentCash} from '../../dataPayment/dataPayment';
+import {paymentCredit, paymentCash} from '../../../../utils/dataPayment';
 
 const MainPayMethods = () => {
   return (

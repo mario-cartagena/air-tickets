@@ -1,5 +1,5 @@
-import React from 'react'
-import Card from '../card/Card'
+import React from 'react';
+import Card from '../../../card/Card';
 import { faCar } from '@fortawesome/free-solid-svg-icons';
 import { faY } from '@fortawesome/free-solid-svg-icons';
 import { faUserGroup } from '@fortawesome/free-solid-svg-icons';

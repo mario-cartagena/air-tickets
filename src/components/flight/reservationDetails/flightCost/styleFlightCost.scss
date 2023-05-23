@@ -30,39 +30,4 @@
         color: #080206;
         font-weight: bold;
     }
-
-    &__origin, &__destiny{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        span:first-child{
-            font-size: 24px;
-            line-height: 29px;
-            font-weight: 700;
-        }
-    }
-    &__departure{
-        display: flex;
-        justify-content: start;
-        gap: 10px;
-    }
-    &__separator{
-        background: #080206;
-        position: relative;
-        width: 20px;
-        height: 2px;
-        bottom: -26px;
-    }
-    &__infodeparture{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-    &__date{
-        p{
-            font-size: 13px;
-            line-height: 15px;
-        }
-    }
 }

@@ -3,10 +3,10 @@ import UseAutocomplete from './UseAutocomplete'
 import { faPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styleSearch.scss'
-import CouponDiscount from '../couponDiscount/CouponDiscount';
-import MultipleSelect from '../multipleSelect/MultipleSelect';
-import imgPlane from "../../assets/img/bg-flight.jpeg"
-import BasicDateRangePicker from '../basicDateRangePicker/BasicDateRangePicker';
+import CouponDiscount from '../../../couponDiscount/CouponDiscount';
+import MultipleSelect from '../../../multipleSelect/MultipleSelect';
+import imgPlane from "../../../../assets/img/bg-flight.jpeg"
+import BasicDateRangePicker from '../../../basicDateRangePicker/BasicDateRangePicker';
 
 function Search() {
 

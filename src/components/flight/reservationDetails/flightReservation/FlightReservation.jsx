@@ -1,5 +1,5 @@
 import React from 'react';
-import './styleFlightReservation.scss'
+import './styleFlightReservation.scss';
 
 const FlightReservation = () => {
   return (

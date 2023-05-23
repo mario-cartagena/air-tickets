@@ -1,22 +1,21 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "../components/layout/Layout";
-import App from "../components/app/App";
 import NotFound from '../components/notfound/NotFound';
-import MainSeats from '../components/mainSeats/MainSeats';
-import Flight from '../components/flight/Flight';
-import FlightDetails from '../components/flightDetails/FlightDetails';
-import Payment from '../components/payment/Payment';
+import MainSeats from '../pages/MainSeats';
+import Flight from '../pages/Flight';
+import FlightDetails from '../pages/FlightDetails';
+import Payment from '../pages/Payment';
+import Home from '../pages/Home';
 
 
 const AppRouter = () => {
     
   return (
-    <div>
     <BrowserRouter>
       <Routes>
         <Route path={"/"} exact element={<Layout />}>
-          <Route index element={<App/>} />
+          <Route index element={<Home/>} />
           <Route path={"flight"} element={<Flight />} />
           <Route path={"seats"} element={<MainSeats />} />
           <Route path={"payment"} element={<Payment />} />
@@ -25,7 +24,6 @@ const AppRouter = () => {
         <Route path="*" element={<NotFound />} /> 
       </Routes>
     </BrowserRouter>
-  </div>
   )
 }
 

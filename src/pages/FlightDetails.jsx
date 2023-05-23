@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
-import BoardingPdf from "./BoardingPdf";
-import VistaWeb from "./VistaWeb";
+import BoardingPdf from "../components/flightDetails/BoardingPdf";
+import VistaWeb from "../components/flightDetails/VistaWeb";
 
 function FlightDetails() {
-  const [verWeb, setVerWeb] = React.useState(true);
-  const [verPDF, setVerPDF] = React.useState(false);
+  const [verWeb, setVerWeb] = useState(true);
+  const [verPDF, setVerPDF] = useState(false);
 
   return (
     <>

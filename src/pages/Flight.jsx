@@ -1,7 +1,7 @@
 import React from 'react'
-import './styleFlight.scss';
-import ReservationDetails from './reservationDetails/ReservationDetails';
-import InfoFlight from './infoFlight/InfoFlight';
+import '../components/flight/styleFlight.scss';
+import ReservationDetails from '../components/flight/reservationDetails/ReservationDetails';
+import InfoFlight from '../components/flight/infoFlight/InfoFlight';
 
 const Flight = () => {
   return (
