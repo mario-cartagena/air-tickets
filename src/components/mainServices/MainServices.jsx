@@ -44,12 +44,13 @@ function MainServices() {
 
 
   return (
-    <div className='container__mainServices'>
-      {services.map((item) => (
-        <Card key={item.id} service={item} />
-      ))}
-
-
+    <div className='mainServices'>
+      <h1 className='mainServices__title'>Servicios disponibles</h1>
+      <div className='mainServices__cards'>
+        {services.map((item) => (
+          <Card key={item.id} service={item} />
+        ))}
+      </div>
     </div>
   )
 }

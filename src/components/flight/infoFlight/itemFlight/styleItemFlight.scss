@@ -4,9 +4,16 @@
     border-radius: .5rem;
     max-width: 100%;
     display: flex;
-    // justify-content: space-between;
     padding: 1.5rem;    
     gap: 3rem;
     flex-direction: row;
-    flex-wrap: wrap;
+}
+
+/*********************Media Query***************************/
+
+@media (max-width: 850px) {
+    .item__flight{
+        flex-wrap: wrap;
+    }
+
 }

@@ -4,9 +4,10 @@ import Layout from "../components/layout/Layout";
 import App from "../components/app/App";
 import NotFound from '../components/notfound/NotFound';
 import MainSeats from '../components/mainSeats/MainSeats';
-import { Payment } from '@mui/icons-material';
 import Flight from '../components/flight/Flight';
 import FlightDetails from '../components/flightDetails/FlightDetails';
+import Payment from '../components/payment/Payment';
+
 
 const AppRouter = () => {
     

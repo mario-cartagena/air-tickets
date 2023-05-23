@@ -11,7 +11,7 @@ const ReservationDetails = () => {
       <FlightReservation/>
       <FlightCost/>
       <FlightServices/>
-      <ButtonSeats/>
+      <ButtonSeats nameButton="Seleccionar asientos"/>
     </div>
   )
 }
