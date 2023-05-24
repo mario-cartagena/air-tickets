@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styleSelectAirport.scss'
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { GetFlights } from '../../../../services/GetFlights';
+import { GetFlights } from '../../../../../services/GetFlights';
 
 const Label = styled('label')({
   display: 'block',
@@ -55,7 +55,7 @@ const Listbox = styled('ul')(({ theme }) => ({
 }));
 
 
-export default function UseAutocomplete({closeModal}) {
+export default function UseAutocomplete({ closeModal, onSelectAirport, itemToSearch }) {
 
   const [flights, setFlights] = useState([]);
 
@@ -69,11 +69,6 @@ export default function UseAutocomplete({closeModal}) {
       .catch((error) => console.log(error));
   }, [flights]);
 
-  // useEffect(() => {
-  //   flights.forEach((item) => {
-  //     console.log(item.departure_airport.name);
-  //   });
-  // }, [flights]);
 
   const {
     getRootProps,
@@ -85,37 +80,37 @@ export default function UseAutocomplete({closeModal}) {
   } = useAutocomplete({
     id: 'use-autocomplete-demo',
     options: flights.map((item) => ({
-      title: item.departure_airport.name,
-      code: item.departure_airport.code_iata,
+      title: item[itemToSearch].city,
+      code: item[itemToSearch].code_iata,
     })),
     getOptionLabel: (option) => option.title,
     isOptionEqualToValue: (option, value) =>
-    option.title === value.title && option.code === value.code, // Personaliza la prueba de igualdad
-    });
+      option.title === value.title && option.code === value.code, // Personaliza la prueba de igualdad
+  });
 
-    console.log(getInputProps().value)
+  console.log(getInputProps().value)
 
-    // const [isDropdownOpen, setDropdownOpen] = useState(false);
+  useEffect(() => {
+    onSelectAirport(getInputProps().value);
+  }, [getInputProps, onSelectAirport]);
 
-    // const handleClose = () => {
-    //   console.log('soy cierre')
-    //   setDropdownOpen(!isDropdownOpen);
-    // };
 
-   
   return (
     <div className='main__selectAirport'>
       <div {...getRootProps()}>
-      <div className='main__selectAirport__label'> <Label {...getInputLabelProps()} className='main__selectAirport__label'>¿A dónde viajas?</Label>  <span onClick={closeModal}><FontAwesomeIcon icon={faXmark} className='car__icon' /></span></div>
+        <div className='main__selectAirport__label'> <Label {...getInputLabelProps()} className='main__selectAirport__label'>¿A dónde viajas?</Label>
+          <span onClick={closeModal}>
+            <FontAwesomeIcon icon={faXmark} className='car__icon' /></span></div>
         <div className='main__selectAirport__body'>
-        <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: 'dark', fontSize: '1rem', marginRight:'.5rem' }}/>
-        <Input {...getInputProps()} style={{ border:'0px solid', outline: 'none' }} placeholder='Buscar aeropuerto de salida' />
+          <FontAwesomeIcon icon={faMagnifyingGlass} style={{ color: 'dark', fontSize: '1rem', marginRight: '.5rem' }} />
+          <Input {...getInputProps()} style={{ border: '0px solid', outline: 'none' }} placeholder='Buscar aeropuerto' />
         </div>
       </div>
       {groupedOptions.length > 0 ? (
         <Listbox {...getListboxProps()}>
           {groupedOptions.map((option, index) => (
-            <li {...getOptionProps({ option, index })} style={{ display:'flex', justifyContent:'space-between', borderTop:'1px solid #e6e6e6', textAlign:'left', height:'40px', padding:'0 8px', alignItems:'center'}}> <div>{option.title}</div> {option.code}</li>
+            <li {...getOptionProps({ option, index })} className='main__selectAirport__li'>
+              <div>{option.title}</div> {option.code}</li>
           ))}
         </Listbox>
       ) : null}

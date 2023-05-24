@@ -5,7 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 // import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import QuantityPassengers from '../quantityPassengers/QuantityPassengers';
+import QuantityPassengers from '../QuantityPassengers';
 import './styleMultipleSelect.scss'
 
 const ITEM_HEIGHT = 48;
@@ -57,7 +57,7 @@ export default function MultipleSelect() {
   //     typeof value === 'string' ? value.split(',') : value,
   //   );
   // };
-  console.log(quantitySelectedAdult + 1);
+  console.log(setQuantitySelectedAdult + 1);
 
 
   return (
