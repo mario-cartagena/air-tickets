@@ -1,5 +1,5 @@
 import React from 'react';
-import './stylesRowSeats.scss';
+import '../rowSeats/stylesRowSeats.scss';
 
 const RowLettersSeats = () => {
   const letters = ['A', 'B', 'C', ' ', 'D', 'E', 'F'];

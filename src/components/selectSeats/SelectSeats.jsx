@@ -1,7 +1,7 @@
 import React from 'react'
 import './stylesSelectSeats.scss'
-import RowSeats from './RowSeats';
-import RowLettersSeats from './RowLettersSeats';
+import RowSeats from './rowSeats/RowSeats';
+import RowLettersSeats from './rowLetters/RowLettersSeats';
 
 const SelectSeats = () => {
 

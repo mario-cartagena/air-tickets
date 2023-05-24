@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './stylesRowSeats.scss';
-import { GetFlights } from '../../services/GetFlights';
+import { GetFlights } from '../../../services/GetFlights';
 
 const RowSeats = ({ number }) => {
     const [flights, setFlights] = useState([]);
