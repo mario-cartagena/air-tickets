@@ -9,6 +9,9 @@ import imgPlane from "../../../../assets/img/bg-flight.jpeg"
 import BasicDateRangePicker from './searchSchedule/basicDateRangePicker/BasicDateRangePicker';
 import DatePickerViews from './searchSchedule/datePickerViews/DatePickerViews';
 import FormPropsDatePickers from './searchSchedule/formProps DatePicker/FormPropsFatePicker';
+import CustomDatePicker from './searchSchedule/customDatePicker/CustomDatePicker';
+import DateRangeValidationShouldDisableDate from './searchSchedule/DateRangeValidationShouldDisableDate';
+
 
 function Search() {
 
@@ -127,8 +130,10 @@ function Search() {
           </div>
         </div>
         <div className='container__search__dates'>
-          {activeButton == 'viajeRedondo' ?
-            <BasicDateRangePicker />
+          {activeButton === 'viajeRedondo' ?
+          //  <BasicDateRangePicker/>
+           <DateRangeValidationShouldDisableDate/>
+            // <CustomDatePicker />
             : <div className='container__search__dates'> <DatePickerViews/>
                     <FormPropsDatePickers/>
               </div>
