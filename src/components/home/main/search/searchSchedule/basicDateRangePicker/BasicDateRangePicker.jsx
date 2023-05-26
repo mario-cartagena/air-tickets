@@ -48,6 +48,7 @@ export default function BasicDateRangePicker() {
     }
   }, [selectedDate]);
 
+  console.log(selectedDate)
 
   return (
     //   <LocalizationProvider dateAdapter={AdapterDayjs}>
