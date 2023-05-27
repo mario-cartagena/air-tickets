@@ -15,13 +15,28 @@ import dayjs from 'dayjs';
 import QuantityPassengers from './searchQuantityPassenger/quantityPassengers/QuantityPassengers';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import { ExpandMoreOutlined } from '@mui/icons-material';
+import FilterFligths from '../../../../services/filterFligths';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 function Search() {
 
+     // ********************FUNCIÓN PARA MANEJAR LOS ESTADOS DEL CONTADOR DE PASAJEROS************************
+
+     const [countAdult, setCountAdult] = useState(1);
+     const [countNiños, setCountNiños] = useState(0);
+     const [countBebes, setCountBebes] = useState(0);
+   
+     // ********************FUNCIÓN PARA MANEJAR EL CUPON DE DCTO***********************
+   
+     const [couponCode, setCouponCode] = useState('');
+
+ 
+
   // ********************FUNCIÓN PARA RECIBIR LAS VARIABLES DE FECHA DESDE DATERANGE************************
 
-  const { selectedDate } = useContext(AppContext);
+  const { selectedDate , filteredData, setFilteredData} = useContext(AppContext);
   const formatDate = (date) => {
     if (!date) return ''; // Manejo de fecha nula
 
@@ -111,44 +126,71 @@ function Search() {
   }, [selectedDepartureAirport]);
 
   // ********************FUNCIÓN PARA VALIDAR Y FILTRAR EL OBJETO DEL FORM************************
-  const handleSubmit = (e) => {
+  const [dataToFilter, setDataToFilter] = useState('');
+  const [dataCitiesFinded, setDataCitiesFinded] = useState([]);
+  const [dataDatesFinded, setDataDatesFinded] = useState([]);
+  const navigate = useNavigate();
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (selectedDepartureAirport === ''
-      || selectedArrivalAirport === ''
-      || dateDepartureSelected === ''
-      || dateArrivalSelected === ''
-      || countAdult === ''
-      || countNiños === ''
-
+  
+    if (
+      selectedDepartureAirport === '' ||
+      selectedArrivalAirport === '' ||
+      dateDepartureSelected === '' ||
+      dateArrivalSelected === '' ||
+      countAdult === '' ||
+      countNiños === ''
     ) {
-      console.log('Por favor seleccionar todos los campos')
+      console.log('Por favor seleccionar todos los campos');
     } else if (selectedDepartureAirport === selectedArrivalAirport) {
-      console.log('La ciudad de destino no puede ser igual a la ciudad de retorno')
-    }
-    else {
-      console.log('Información agregada:', {
-        selectedDepartureAirport,
-        selectedArrivalAirport,
-        dateDepartureSelected,
-        dateArrivalSelected,
-        countAdult: countAdult,
-        countNiños: countNiños,
-        couponCode
-
-      })
+      console.log('La ciudad de destino no puede ser igual a la ciudad de retorno');
+    } else {
+        setDataToFilter({
+          selectedDepartureAirport,
+          selectedArrivalAirport,
+          dateDepartureSelected,
+          dateArrivalSelected,
+          countAdult,
+          countNiños,
+          couponCode,
+      });
+  
+      try {
+        const response = await axios.get('https://tickets-backend.herokuapp.com/flights', {
+          params: { ...dataToFilter },
+        });
+  
+        const data = response.data;
+        console.log('Información filtrada:', data);
+        console.log(typeof data);
+  
+        const filteredCities = data.filter((item) => item.departure_airport.city === selectedDepartureAirport && item.arrival_airport.city === selectedArrivalAirport);
+        console.log('Ciudades Filtradas:', filteredCities);
+        setDataCitiesFinded(filteredCities);
+       const filteredDates = filteredCities.filter((item) => item.departure_date === dateDepartureSelected);
+        console.log('Fechas filtradas:', filteredDates);
+        setDataDatesFinded(filteredDates);
+        sessionStorage.setItem('filteredDates', JSON.stringify(filteredDates));
+      
+        if (dataDatesFinded.length === 0) {
+          console.log("no hay fechas disponibles para el destino seleccionado")
+     
+        } else {
+          console.log('resultados de busqueda salida', filteredDates)
+          
+          navigate('flight')
+        }
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
     }
   };
+  
+  // console.log(dataToFilter);
+  
+  
 
-  // ********************FUNCIÓN PARA MANEJAR LOS ESTADOS DEL CONTADOR DE PASAJEROS************************
-
-  const [countAdult, setCountAdult] = useState(1);
-  const [countNiños, setCountNiños] = useState(0);
-  const [countBebes, setCountBebes] = useState(0);
-
-  // ********************FUNCIÓN PARA MANEJAR EL CUPON DE DCTO***********************
-
-  const [couponCode, setCouponCode] = useState('');
 
   return (
     <>
@@ -223,7 +265,7 @@ function Search() {
             <div className='container__searchQuantiy'>
               {/* <SelectPassenger/> */}
 
-              <Accordion>
+               <Accordion>
                 <AccordionSummary expandIcon={<ExpandMoreOutlined />}>
                   {/* <div>Pasajeros</div> <br/> */}
                   <Typography>{countAdult} Adulto   </Typography>
@@ -232,7 +274,7 @@ function Search() {
 
                   {/* <Typography>{countBebes} Bebes </Typography> */}
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails> 
 
                   <div name={countAdult} style={{ display: 'flex', justifyContent: 'center' }}>
                     <QuantityPassengers
