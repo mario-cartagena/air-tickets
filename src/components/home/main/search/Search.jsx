@@ -20,6 +20,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
+
 function Search() {
 
      // ********************FUNCIÓN PARA MANEJAR LOS ESTADOS DEL CONTADOR DE PASAJEROS************************
@@ -255,7 +256,7 @@ function Search() {
               //  <BasicDateRangePicker/>
               <DateRangeValidationShouldDisableDate />
               // <CustomDatePicker />
-              : <div className='container__search__dates'> <DatePickerViews />
+              : <div className='container__search__dates'> <DatePickerViews style={{width: '280px'}} />
                 <FormPropsDatePickers />
               </div>
             }
@@ -265,8 +266,8 @@ function Search() {
             <div className='container__searchQuantiy'>
               {/* <SelectPassenger/> */}
 
-               <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreOutlined />}>
+              <Accordion style={{background: 'transparent'}}>
+                <AccordionSummary style={{height: '56px', border: '1.5px solid #D3CBCB', borderRadius: '4px', borderBottom: 0}} expandIcon={<ExpandMoreOutlined />}>
                   {/* <div>Pasajeros</div> <br/> */}
                   <Typography>{countAdult} Adulto   </Typography>
                   {countNiños !== 0 && <Typography>,  {countNiños} Niños   </Typography>}
@@ -274,8 +275,7 @@ function Search() {
 
                   {/* <Typography>{countBebes} Bebes </Typography> */}
                 </AccordionSummary>
-                <AccordionDetails> 
-
+                <AccordionDetails style={{position: 'absolute', left: '295px', top: '0px', backgroundColor: '#fff',  zIndex: '10000',  borderRadius: '0 0 1rem 1rem'}}>
                   <div name={countAdult} style={{ display: 'flex', justifyContent: 'center' }}>
                     <QuantityPassengers
                       name={'Adulto   '} description={'(13 + años)'} count={countAdult} setCount={setCountAdult}
