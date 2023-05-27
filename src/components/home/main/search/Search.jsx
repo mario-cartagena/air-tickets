@@ -15,6 +15,7 @@ import dayjs from 'dayjs';
 import QuantityPassengers from './searchQuantityPassenger/quantityPassengers/QuantityPassengers';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material';
 import { ExpandMoreOutlined } from '@mui/icons-material';
+import axios from 'axios';
 
 
 function Search() {
@@ -110,35 +111,63 @@ function Search() {
     }
   }, [selectedDepartureAirport]);
 
-  // ********************FUNCIÓN PARA VALIDAR Y FILTRAR EL OBJETO DEL FORM************************
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (selectedDepartureAirport === ''
-      || selectedArrivalAirport === ''
-      || dateDepartureSelected === ''
-      || dateArrivalSelected === ''
-      || countAdult === ''
-      || countNiños === ''
-
-    ) {
-      console.log('Por favor seleccionar todos los campos')
-    } else if (selectedDepartureAirport === selectedArrivalAirport) {
-      console.log('La ciudad de destino no puede ser igual a la ciudad de retorno')
-    }
-    else {
-      console.log('Información agregada:', {
-        selectedDepartureAirport,
-        selectedArrivalAirport,
-        dateDepartureSelected,
-        dateArrivalSelected,
-        countAdult: countAdult,
-        countNiños: countNiños,
-        couponCode
-
-      })
-    }
-  };
+ // *******FUNCIÓN PARA VALIDAR Y FILTRAR EL OBJETO DEL FORM*********
+ const [dataToFilter, setDataToFilter] = useState('');
+ const [dataCitiesFinded, setDataCitiesFinded] = useState([]);
+ const [dataDatesFinded, setDataDatesFinded] = useState([]);
+ 
+ const handleSubmit = async (e) => {
+   e.preventDefault();
+ 
+   if (
+     selectedDepartureAirport === '' ||
+     selectedArrivalAirport === '' ||
+     dateDepartureSelected === '' ||
+     dateArrivalSelected === '' ||
+     countAdult === '' ||
+     countNiños === ''
+   ) {
+     console.log('Por favor seleccionar todos los campos');
+   } else if (selectedDepartureAirport === selectedArrivalAirport) {
+     console.log('La ciudad de destino no puede ser igual a la ciudad de retorno');
+   } else {
+       setDataToFilter({
+         selectedDepartureAirport,
+         selectedArrivalAirport,
+         dateDepartureSelected,
+         dateArrivalSelected,
+         countAdult,
+         countNiños,
+         couponCode,
+     });
+ 
+     try {
+       const response = await axios.get('https://tickets-backend.herokuapp.com/flights', {
+         params: { ...dataToFilter },
+       });
+ 
+       const data = response.data;
+       console.log('Información filtrada:', data);
+       console.log(typeof data);
+ 
+       const filteredCities = data.filter((item) => item.departure_airport.city === selectedDepartureAirport && item.arrival_airport.city === selectedArrivalAirport);
+       console.log('Ciudades Filtradas:', filteredCities);
+       setDataCitiesFinded(filteredCities);
+       const filteredDates = filteredCities.filter((item) => item.departure_date === dateDepartureSelected);
+       console.log('Fechas filtradas:', filteredDates);
+       setDataDatesFinded(filteredDates);
+     
+       if (dataDatesFinded.length === 0) {
+         console.log("no hay fechas disponibles para los destinos seleccionados")
+    
+       } else {
+         console.log('resultados de busqueda salida', filteredDates)
+       }
+     } catch (error) {
+       console.error('Error al obtener los datos:', error);
+     }
+   }
+ };
 
   // ********************FUNCIÓN PARA MANEJAR LOS ESTADOS DEL CONTADOR DE PASAJEROS************************
 
@@ -213,7 +242,7 @@ function Search() {
               //  <BasicDateRangePicker/>
               <DateRangeValidationShouldDisableDate />
               // <CustomDatePicker />
-              : <div className='container__search__dates'> <DatePickerViews />
+              : <div className='container__search__dates'> <DatePickerViews style={{width: '280px'}} />
                 <FormPropsDatePickers />
               </div>
             }
@@ -223,8 +252,8 @@ function Search() {
             <div className='container__searchQuantiy'>
               {/* <SelectPassenger/> */}
 
-              <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreOutlined />}>
+              <Accordion style={{background: 'transparent'}}>
+                <AccordionSummary style={{height: '56px', border: '1.5px solid #D3CBCB', borderRadius: '4px', borderBottom: 0}} expandIcon={<ExpandMoreOutlined />}>
                   {/* <div>Pasajeros</div> <br/> */}
                   <Typography>{countAdult} Adulto   </Typography>
                   {countNiños !== 0 && <Typography>,  {countNiños} Niños   </Typography>}
@@ -232,8 +261,7 @@ function Search() {
 
                   {/* <Typography>{countBebes} Bebes </Typography> */}
                 </AccordionSummary>
-                <AccordionDetails>
-
+                <AccordionDetails style={{position: 'absolute', left: '295px', top: '0px', backgroundColor: '#fff',  zIndex: '10000',  borderRadius: '0 0 1rem 1rem'}}>
                   <div name={countAdult} style={{ display: 'flex', justifyContent: 'center' }}>
                     <QuantityPassengers
                       name={'Adulto   '} description={'(13 + años)'} count={countAdult} setCount={setCountAdult}
