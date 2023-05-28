@@ -1,16 +1,16 @@
 import React from 'react'
 import './styleFlightSchedules.scss';
 
-const FlightSchedules = () => {
+const FlightSchedules = ({departureTime, duration, arrivalTime, scales}) => {
   return (
     <div className='schedules'>
-        <span>05:50 PM</span>
+        <span>{departureTime}</span>
         <div className='schedules__time'>
-            <p>1h 57min</p>
+            <p>{duration}</p>
             <div className='horizontalLine'></div>
-            <p>Sin escalas</p>
+           {scales === 0 ?  <p> Sin escalas </p> : <p>{scales} escalas </p> } 
         </div>
-        <span>06:47 PM</span>
+        <span>{arrivalTime}</span>
     </div>
   )
 }

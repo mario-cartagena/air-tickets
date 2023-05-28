@@ -10,7 +10,7 @@ const Flight = () => {
     <div className='flights'>
       <div className='flights__information'>
         <InfoFlight/>
-        <InfoFlight/>
+        {/* <InfoFlight/> */}
       </div>
       <div className='flights__reservation'>
           <ReservationDetails/>

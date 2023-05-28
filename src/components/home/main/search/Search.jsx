@@ -23,21 +23,20 @@ import { useNavigate } from 'react-router-dom';
 
 function Search() {
 
-     // ********************FUNCIÓN PARA MANEJAR LOS ESTADOS DEL CONTADOR DE PASAJEROS************************
+  // ********************FUNCIÓN PARA MANEJAR LOS ESTADOS DEL CONTADOR DE PASAJEROS************************
 
-     const [countAdult, setCountAdult] = useState(1);
-     const [countNiños, setCountNiños] = useState(0);
-     const [countBebes, setCountBebes] = useState(0);
-   
-     // ********************FUNCIÓN PARA MANEJAR EL CUPON DE DCTO***********************
-   
-     const [couponCode, setCouponCode] = useState('');
+  const [countAdult, setCountAdult] = useState(1);
+  const [countNiños, setCountNiños] = useState(0);
+  const [countBebes, setCountBebes] = useState(0);
 
- 
+  // ********************FUNCIÓN PARA MANEJAR EL CUPON DE DCTO***********************
+
+  const [couponCode, setCouponCode] = useState('');
+
 
   // ********************FUNCIÓN PARA RECIBIR LAS VARIABLES DE FECHA DESDE DATERANGE************************
 
-  const { selectedDate , filteredData, setFilteredData} = useContext(AppContext);
+  const { selectedDate, filteredData, setFilteredData, selectedDateSimple, setSelectedDateSimple } = useContext(AppContext);
   const formatDate = (date) => {
     if (!date) return ''; // Manejo de fecha nula
 
@@ -58,7 +57,10 @@ function Search() {
   console.log('selectedDate en Search:', formatDateLetters(selectedDate[0]));
 
 
+  // ********************FUNCIÓN PARA RECIBIR LAS VARIABLES DE FECHA DESDE DATEPICKERVIEWS************************
 
+  console.log(formatDate(selectedDateSimple))
+  const dateDepartureSelectedSimple = formatDate(selectedDateSimple)
 
   // ********************FUNCIÓN PARA MANEJAR EL ESTADO DE BOTON VIAJE REDONDO************************
 
@@ -130,23 +132,27 @@ function Search() {
   const [dataToFilter, setDataToFilter] = useState('');
   const [dataCitiesFinded, setDataCitiesFinded] = useState([]);
   const [dataDatesFinded, setDataDatesFinded] = useState([]);
+  const [dataCitiesFindedRound, setDataCitiesFindedRound] = useState([]);
+  const [dataDatesFindedRound, setDataDatesFindedRound] = useState([]);
   const navigate = useNavigate();
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    if (
-      selectedDepartureAirport === '' ||
-      selectedArrivalAirport === '' ||
-      dateDepartureSelected === '' ||
-      dateArrivalSelected === '' ||
-      countAdult === '' ||
-      countNiños === ''
-    ) {
-      console.log('Por favor seleccionar todos los campos');
-    } else if (selectedDepartureAirport === selectedArrivalAirport) {
-      console.log('La ciudad de destino no puede ser igual a la ciudad de retorno');
-    } else {
+
+    if (activeButton === 'viajeRedondo') {
+
+      if (
+        selectedDepartureAirport === '' ||
+        selectedArrivalAirport === '' ||
+        dateDepartureSelected === '' ||
+        dateArrivalSelected === '' ||
+        countAdult === '' ||
+        countNiños === ''
+      ) {
+        console.log('Por favor seleccionar todos los campos');
+      } else if (selectedDepartureAirport === selectedArrivalAirport) {
+        console.log('La ciudad de destino no puede ser igual a la ciudad de retorno');
+      } else {
         setDataToFilter({
           selectedDepartureAirport,
           selectedArrivalAirport,
@@ -155,42 +161,120 @@ function Search() {
           countAdult,
           countNiños,
           couponCode,
-      });
-  
-      try {
-        const response = await axios.get('https://tickets-backend.herokuapp.com/flights', {
-          params: { ...dataToFilter },
         });
-  
-        const data = response.data;
-        console.log('Información filtrada:', data);
-        console.log(typeof data);
-  
-        const filteredCities = data.filter((item) => item.departure_airport.city === selectedDepartureAirport && item.arrival_airport.city === selectedArrivalAirport);
-        console.log('Ciudades Filtradas:', filteredCities);
-        setDataCitiesFinded(filteredCities);
-       const filteredDates = filteredCities.filter((item) => item.departure_date === dateDepartureSelected);
-        console.log('Fechas filtradas:', filteredDates);
-        setDataDatesFinded(filteredDates);
-        sessionStorage.setItem('filteredDates', JSON.stringify(filteredDates));
-      
-        if (dataDatesFinded.length === 0) {
-          console.log("no hay fechas disponibles para el destino seleccionado")
-     
-        } else {
-          console.log('resultados de busqueda salida', filteredDates)
-          
-          navigate('flight')
+        sessionStorage.setItem('dataToFilter', JSON.stringify(dataToFilter));
+
+        try {
+          const response = await axios.get('https://tickets-backend.herokuapp.com/flights', {
+            params: { ...dataToFilter },
+          });
+
+          const data = response.data;
+          console.log('Información filtrada:', data);
+          console.log(typeof data);
+
+          // ********************FUNCIÓN PARA FILTRAR VUELOS DE IDA ************************
+
+          const filteredCities = data.filter((item) => item.departure_airport.city === selectedDepartureAirport && item.arrival_airport.city === selectedArrivalAirport);
+          console.log('Ciudades Filtradas:', filteredCities);
+          setDataCitiesFinded(filteredCities);
+          const filteredDates = filteredCities.filter((item) => item.departure_date === dateDepartureSelected);
+          console.log('Fechas filtradas:', filteredDates);
+          setDataDatesFinded(filteredDates);
+
+          if (dataDatesFinded.length === 0) {
+            console.log("no hay fechas disponibles para el destino seleccionado")
+
+          } else {
+            console.log('resultados de busqueda salida', filteredDates)
+            sessionStorage.setItem('filteredDates', JSON.stringify(filteredDates));
+            navigate('flight')
+          }
+
+
+          // ********************FUNCIÓN PARA FILTRAR VUELOS DE VUELTA************************
+
+          if (dateArrivalSelected !== '') {
+            const filteredCitiesRound = data.filter((item) => item.departure_airport.city === selectedArrivalAirport && item.arrival_airport.city === selectedDepartureAirport);
+            console.log('Ciudades Filtradas Round:', filteredCitiesRound);
+            setDataCitiesFindedRound(filteredCitiesRound);
+            console.log(dataCitiesFindedRound)
+
+            if (filteredCitiesRound.length === 0) {
+              console.log("no hay vuelos disponibles")
+
+            } else {
+              console.log('soy salida', dateArrivalSelected)
+              const filteredDatesRound = dataCitiesFindedRound.filter((item) => item.departure_date === dateArrivalSelected);
+              console.log('Fechas filtradas Round:', filteredDatesRound);
+              setDataDatesFindedRound(filteredDatesRound);
+              sessionStorage.setItem('filteredDatesRound', JSON.stringify(filteredDatesRound));
+
+            }
+          }
+
+
+        } catch (error) {
+          console.error('Error al obtener los datos:', error);
         }
-      } catch (error) {
-        console.error('Error al obtener los datos:', error);
       }
-    }
+    } else {
+        if (
+          selectedDepartureAirport === '' ||
+          selectedArrivalAirport === '' ||
+          dateDepartureSelectedSimple === '' ||
+          countAdult === '' ||
+          countNiños === ''
+        ) {
+          console.log('Por favor seleccionar todos los campos');
+        } else if (selectedDepartureAirport === selectedArrivalAirport) {
+          console.log('La ciudad de destino no puede ser igual a la ciudad de retorno');
+        } else {
+          setDataToFilter({
+            selectedDepartureAirport,
+            selectedArrivalAirport,
+            dateDepartureSelectedSimple,
+            countAdult,
+            countNiños,
+            couponCode,
+          });
+          sessionStorage.setItem('dataToFilter', JSON.stringify(dataToFilter));
+  
+          try {
+            const response = await axios.get('https://tickets-backend.herokuapp.com/flights', {
+              params: { ...dataToFilter },
+            });
+  
+            const data = response.data;
+            console.log('Información filtrada:', data);
+            console.log(typeof data);
+  
+            // ********************FUNCIÓN PARA FILTRAR VUELOS DE IDA ************************
+  
+            const filteredCities = data.filter((item) => item.departure_airport.city === selectedDepartureAirport && item.arrival_airport.city === selectedArrivalAirport);
+            console.log('Ciudades Filtradas:', filteredCities);
+            setDataCitiesFinded(filteredCities);
+            const filteredDates = filteredCities.filter((item) => item.departure_date === dateDepartureSelectedSimple);
+            console.log('Fechas filtradas:', filteredDates);
+            setDataDatesFinded(filteredDates);
+  
+            if (dataDatesFinded.length === 0) {
+              console.log("no hay fechas disponibles para el destino seleccionado")
+  
+            } else {
+              console.log('resultados de busqueda salida', filteredDates)
+              sessionStorage.setItem('filteredDates', JSON.stringify(filteredDates));
+              navigate('flight')
+            }
+  
+  
+          } catch (error) {
+            console.error('Error al obtener los datos:', error);
+          }
+        }
+      }
   };
-  
-  // console.log(dataToFilter);
-  
-  
+
 
 
   return (
@@ -256,7 +340,7 @@ function Search() {
               //  <BasicDateRangePicker/>
               <DateRangeValidationShouldDisableDate />
               // <CustomDatePicker />
-              : <div className='container__search__dates'> <DatePickerViews style={{width: '280px'}} />
+              : <div className='container__search__dates'> <DatePickerViews style={{ width: '280px' }} />
                 <FormPropsDatePickers />
               </div>
             }
@@ -266,8 +350,8 @@ function Search() {
             <div className='container__searchQuantiy'>
               {/* <SelectPassenger/> */}
 
-              <Accordion style={{background: 'transparent'}}>
-                <AccordionSummary style={{height: '56px', border: '1.5px solid #D3CBCB', borderRadius: '4px', borderBottom: 0}} expandIcon={<ExpandMoreOutlined />}>
+              <Accordion style={{ background: 'transparent' }}>
+                <AccordionSummary style={{ height: '56px', border: '1.5px solid #D3CBCB', borderRadius: '4px', borderBottom: 0 }} expandIcon={<ExpandMoreOutlined />}>
                   {/* <div>Pasajeros</div> <br/> */}
                   <Typography>{countAdult} Adulto   </Typography>
                   {countNiños !== 0 && <Typography>,  {countNiños} Niños   </Typography>}
@@ -275,7 +359,7 @@ function Search() {
 
                   {/* <Typography>{countBebes} Bebes </Typography> */}
                 </AccordionSummary>
-                <AccordionDetails style={{position: 'absolute', left: '295px', top: '0px', backgroundColor: '#fff',  zIndex: '10000',  borderRadius: '0 0 1rem 1rem'}}>
+                <AccordionDetails style={{ position: 'absolute', left: '295px', top: '0px', backgroundColor: '#fff', zIndex: '10000', borderRadius: '0 0 1rem 1rem' }}>
                   <div name={countAdult} style={{ display: 'flex', justifyContent: 'center' }}>
                     <QuantityPassengers
                       name={'Adulto   '} description={'(13 + años)'} count={countAdult} setCount={setCountAdult}
