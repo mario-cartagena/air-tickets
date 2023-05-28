@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import './styleFlighPackages.scss';
+import React, { useContext, useEffect, useState } from 'react';
 import BaggageIcon from '../../../../../assets/img/icons/briefcase.svg';
+import { AppContext } from '../../../../home/main/search/searchSchedule/appContext/AppContext';
+import './styleFlighPackages.scss';
 
 const FlightPackages = ({ id, name, data }) => {
+
+  const { departureInfoBaggage, setDepartureInfoBaggage, arrivalInfoBaggage, setArrivalInfoBaggage } = useContext(AppContext);
+  const [baggageSelected, setBaggageSelected] = useState('');
+  const [flightConfirmed, setFlightConfirmed] = useState({});
   const [oneObject,] = useState(30000);
   const [handBagagge] = useState(50000);
   const [kgBaggage] = useState(90000);
-  const [baggageSelected, setBaggageSelected] = useState('');
-  const [flightConfirmed, setFlightConfirmed] = useState({});
 
   const handleGetBaggage = (baggage, id, name, data) => {
     setBaggageSelected(baggage);
@@ -18,17 +21,19 @@ const FlightPackages = ({ id, name, data }) => {
       data: data
     };
     setFlightConfirmed(flightConfirmed);
+    // console.log(flightConfirmed);
+    if (flightConfirmed.name === 'departureFlight') {
+      // console.log('soy departureFlight')
+      setDepartureInfoBaggage(flightConfirmed)
+    } else {
+      // console.log('soy arrivalFlight')
+      setArrivalInfoBaggage(flightConfirmed)
+    }
   };
-  // console.log(flightConfirmed);
-  if (flightConfirmed.name === 'departureFlight') {
-    console.log('soy departureFlight')
-    const departureInfo = flightConfirmed
-    console.log(departureInfo)
-  } else {
-    console.log('soy arrivalFlight')
-    const arrivalInfo = flightConfirmed
-    console.log(arrivalInfo)
-  }
+
+    console.log(departureInfoBaggage);
+    console.log(arrivalInfoBaggage);
+
 
   return (
     <div className='baggage'>
