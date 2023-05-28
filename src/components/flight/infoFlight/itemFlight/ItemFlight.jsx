@@ -3,8 +3,9 @@ import './styleItemFlight.scss';
 import FlightSchedules from './flightSchedules/FlightSchedules'
 import FlightPackages from './flightPackages/FlightPackages'
 
-const ItemFlight = ({ data }) => {
+const ItemFlight = ({ data, name }) => {
   console.log(data)
+  console.log(name)
 
   return (
     <div className='item__flight'>
@@ -16,7 +17,7 @@ const ItemFlight = ({ data }) => {
             scales={i.scales}
             arrivalTime={i.arrival_time}
           />
-          <FlightPackages id={data} />
+          <FlightPackages id={i.id} name={name} data={data} />
         </>
       ))}
     </div>

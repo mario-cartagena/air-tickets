@@ -1,47 +1,43 @@
-import React, { useContext, useState } from 'react'
-import './styleFlighPackages.scss'
+import React, { useState } from 'react';
+import './styleFlighPackages.scss';
 import BaggageIcon from '../../../../../assets/img/icons/briefcase.svg';
-import { AppContext } from '../../../../home/main/search/searchSchedule/appContext/AppContext';
 
-const FlightPackages = ({ id }) => {
+const FlightPackages = ({ id, name, data }) => {
+  const [oneObject,] = useState(30000);
+  const [handBagagge] = useState(50000);
+  const [kgBaggage] = useState(90000);
+  const [baggageSelected, setBaggageSelected] = useState('');
+  const [flightConfirmed, setFlightConfirmed] = useState({});
 
-  const [oneObject, setOneObject] = useState(30000)
-  const [handBagagge, sethandBagagge] = useState(50000)
-  const [kgBaggage, setkgBaggage] = useState(90000)
-  const [baggageSelected, setBaggageSelected] = useState('')
-  const [departureFlightConfirmed, setDepartureFlightConfirmed] = useState({})
-
-
-  const handleGetBaggage = (baggage, id) => {
+  const handleGetBaggage = (baggage, id, name, data) => {
     setBaggageSelected(baggage);
-    setDepartureFlightConfirmed({
-      ...departureFlightConfirmed,
+    const flightConfirmed = {
       flightId: id,
-      baggaggePrice: baggageSelected
-  })
-    console.log(departureFlightConfirmed)
+      baggagePrice: baggage,
+      name: name,
+      data: data
+    };
+    console.log(flightConfirmed);
+    setFlightConfirmed(flightConfirmed);
   };
-  console.log(baggageSelected)
-  console.log(id)
-
 
   return (
     <div className='baggage'>
-      <div className='baggage__personal' onClick={() => handleGetBaggage(oneObject, id)}>
+      <div className='baggage__personal' onClick={() => handleGetBaggage(oneObject, id, name, data)}>
         <figure>
           <img src={BaggageIcon} alt="Icon Package" />
         </figure>
         <span>1 objeto personal</span>
         <span className='baggage__price'>${oneObject} COP</span>
       </div>
-      <div className='baggage__hand' onClick={() => handleGetBaggage(handBagagge, id)}>
+      <div className='baggage__hand' onClick={() => handleGetBaggage(handBagagge, id, name, data)}>
         <figure>
           <img src={BaggageIcon} alt="Icon Package" />
         </figure>
         <span>Equipaje de mano</span>
         <span className='baggage__price'>${handBagagge} COP</span>
       </div>
-      <div className='baggage__25k' onClick={() => handleGetBaggage(kgBaggage, id)}>
+      <div className='baggage__25k' onClick={() => handleGetBaggage(kgBaggage, id, name, data)}>
         <figure>
           <img src={BaggageIcon} alt="Icon Package" />
         </figure>
@@ -49,7 +45,7 @@ const FlightPackages = ({ id }) => {
         <span className='baggage__price'>${kgBaggage} COP</span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FlightPackages
+export default FlightPackages;

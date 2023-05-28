@@ -26,7 +26,8 @@ const InfoFlight = () => {
         <div className='info__packages'>
           <p className='info__title'>Selección de horarios y equipajes</p>
           {parsedFilteredDates ?
-            <ItemFlight data={parsedFilteredDates} /> : ''}
+            <ItemFlight data={parsedFilteredDates} name="departureFlight" />
+            : ''}
 
         </div>
       </div>
@@ -40,7 +41,7 @@ const InfoFlight = () => {
         <div className='info__packages'>
           <p className='info__title'>Selección de horarios y equipajes</p>
           {Object.entries(parsedFilteredDatesRound).length > 0 ? (
-            <ItemFlight data={parsedFilteredDatesRound} />
+            <ItemFlight data={parsedFilteredDatesRound} name="arrivalFlight" />
           ) : (
             <h1>No hay vuelos Disponibles</h1>
           )}
