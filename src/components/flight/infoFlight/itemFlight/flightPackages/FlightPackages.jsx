@@ -17,9 +17,18 @@ const FlightPackages = ({ id, name, data }) => {
       name: name,
       data: data
     };
-    console.log(flightConfirmed);
     setFlightConfirmed(flightConfirmed);
   };
+  // console.log(flightConfirmed);
+  if (flightConfirmed.name === 'departureFlight') {
+    console.log('soy departureFlight')
+    const departureInfo = flightConfirmed
+    console.log(departureInfo)
+  } else {
+    console.log('soy arrivalFlight')
+    const arrivalInfo = flightConfirmed
+    console.log(arrivalInfo)
+  }
 
   return (
     <div className='baggage'>
