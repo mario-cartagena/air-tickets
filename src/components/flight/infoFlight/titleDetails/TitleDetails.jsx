@@ -1,14 +1,18 @@
 import React from 'react';
 import './styleTitleDetails.scss'
+import { formatDate } from '../../../../utils/helpers';
 
-const TitleDetails = () => {
+const TitleDetails = ({name, date, departure, arrival}) => {
+
   return (
     <div className='flight__details'>
-        <h1>Vuelo de salida</h1>
-        <div className='details'>
-          <h4>Martes 30 nov 2021</h4>
-          <span>Cd. Mex (AICM) a Culiacán</span>
-        </div>
+      <h1>Vuelo de {name}</h1>
+      <div className='details'>
+        {date &&
+          <h4>{formatDate(date)}</h4>
+        }
+        <span>{departure} a {arrival}</span>
+      </div>
     </div>
   )
 }

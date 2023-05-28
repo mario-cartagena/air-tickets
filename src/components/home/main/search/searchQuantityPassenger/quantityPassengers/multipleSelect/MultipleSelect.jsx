@@ -19,46 +19,15 @@ const MenuProps = {
   },
 };
 
-// const names = [
-//   'Oliver Hansen',
-//   'Van Henry',
-//   'April Tucker',
-//   'Ralph Hubbard',
-//   'Omar Alexander',
-//   'Carlos Abbott',
-//   'Miriam Wagner',
-//   'Bradley Wilkerson',
-//   'Virginia Andrews',
-//   'Kelly Snyder',
-// ];
 
-// function getStyles(name, personName, theme) {
-//   return {
-//     fontWeight:
-//       personName.indexOf(name) === -1
-//         ? theme.typography.fontWeightRegular
-//         : theme.typography.fontWeightMedium,
-//   };
-// }
 
 export default function MultipleSelect() {
   // const theme = useTheme();
   // const [personName, setPersonName] = useState([]);
-  const [quantitySelectedAdult, setQuantitySelectedAdult] = useState(0)
-  const [quantitySelectedNiños, setQuantitySelectedNiños] = useState(0)
-  const [quantitySelectedBebes, setQuantitySelectedBebes] = useState(0)
+  const [count, setCount] = useState(0);
 
-  // const handleChange = (event) => {
-  //   const {
-  //     target: { value },
-  //   } = event;
-  //   setPersonName(
-  //     // On autofill we get a stringified value.
-  //     typeof value === 'string' ? value.split(',') : value,
-  //   );
-  // };
-  console.log(setQuantitySelectedAdult + 1);
-
+  console.log(setCount + 1);
+  console.log(count);
 
   return (
     <div className='form__select'>
@@ -68,23 +37,26 @@ export default function MultipleSelect() {
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
           multiple
-          value={[quantitySelectedAdult]}
+          value={[count]}
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
         >
 
-          <div name={quantitySelectedAdult} style={{ display: 'flex', justifyContent: 'center' }}>
+          <div name={count} style={{ display: 'flex', justifyContent: 'center' }}>
             <QuantityPassengers
-              quantitySelectedAdult={quantitySelectedAdult}
-              quantitySelectedNiños={quantitySelectedNiños}
-              quantitySelectedBebes={quantitySelectedBebes}
-              setQuantitySelectedAdult={setQuantitySelectedAdult}
-              setQuantitySelectedNiños={setQuantitySelectedNiños}
-              setQuantitySelectedBebes={setQuantitySelectedBebes}
-
-
+              name={'Adulto'} description={'(13 + años)'} count={count} setCount={setCount}
             />
           </div>
+           {/* <div name={count} style={{ display: 'flex', justifyContent: 'center' }}>
+            <QuantityPassengers
+              name={'niños'} description={'(13 + años)'} count={count} setCount={setCount}
+            />
+          </div>
+          <div name={count} style={{ display: 'flex', justifyContent: 'center' }}>
+            <QuantityPassengers
+              name={'bebes'} description={'(13 + años)'} count={count} setCount={setCount}
+            />
+          </div>  */}
 
         </Select>
       </FormControl>

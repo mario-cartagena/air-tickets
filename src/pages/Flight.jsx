@@ -4,11 +4,13 @@ import ReservationDetails from '../components/flight/reservationDetails/Reservat
 import InfoFlight from '../components/flight/infoFlight/InfoFlight';
 
 const Flight = () => {
+
+
   return (
     <div className='flights'>
       <div className='flights__information'>
         <InfoFlight/>
-        <InfoFlight/>
+        {/* <InfoFlight/> */}
       </div>
       <div className='flights__reservation'>
           <ReservationDetails/>
