@@ -36,14 +36,14 @@ function Search() {
 
   // ********************FUNCIÓN PARA RECIBIR LAS VARIABLES DE FECHA DESDE DATERANGE************************
 
-  const { selectedDate, filteredData, setFilteredData, selectedDateSimple, setSelectedDateSimple, departureInfo, arrivalInfo  } = useContext(AppContext);
+  const { selectedDate, filteredData, setFilteredData, selectedDateSimple, setSelectedDateSimple, departureInfoBaggage, arrivalInfoBaggage  } = useContext(AppContext);
   const formatDate = (date) => {
     if (!date) return ''; // Manejo de fecha nula
 
     return dayjs(date.$d).format('YYYY-MM-DD')
   };
 
-  console.log(departureInfo, arrivalInfo );
+  // console.log(departureInfo, arrivalInfo );
 
   const dateDepartureSelected = formatDate(selectedDate[0]);
   console.log('selectedDate departure en Search:', dateDepartureSelected);

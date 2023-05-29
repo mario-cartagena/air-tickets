@@ -9,6 +9,12 @@ const AppProvider = ({ children }) => {
   const [selectedDateSimple, setSelectedDateSimple] = useState(null);
   const [departureInfoBaggage, setDepartureInfoBaggage] = useState({});
   const [arrivalInfoBaggage, setArrivalInfoBaggage] = useState({});
+  const storedDepartureInfoBaggage = sessionStorage.getItem('departureInfoBaggage');
+  const parsedDepartureInfoBaggage = JSON.parse(storedDepartureInfoBaggage);
+  const storedArrivalInfoBaggage = sessionStorage.getItem('arrivalInfoBaggage');
+  const parsedArrivalInfoBaggage = JSON.parse(storedArrivalInfoBaggage);
+  // setDepartureInfoBaggage(parsedDepartureInfoBaggage)
+ 
   return (
     <AppContext.Provider value={{
       selectedDate,
@@ -19,7 +25,9 @@ const AppProvider = ({ children }) => {
       departureInfoBaggage,
       setDepartureInfoBaggage,
       arrivalInfoBaggage,
-      setArrivalInfoBaggage
+      setArrivalInfoBaggage,
+      parsedDepartureInfoBaggage,
+      parsedArrivalInfoBaggage
     }}>
       {children}
     </AppContext.Provider>

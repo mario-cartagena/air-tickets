@@ -40,7 +40,7 @@ const InfoFlight = () => {
         </div>
         <div className='info__packages'>
           <p className='info__title'>Selección de horarios y equipajes</p>
-          {Object.entries(parsedFilteredDatesRound).length > 0 ? (
+          {parsedFilteredDatesRound == {} || null || undefined ? (
             <ItemFlight data={parsedFilteredDatesRound} name="arrivalFlight" />
           ) : (
             <h1>No hay vuelos Disponibles</h1>
