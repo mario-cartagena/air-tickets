@@ -342,7 +342,8 @@ function Search() {
               //  <BasicDateRangePicker/>
               <DateRangeValidationShouldDisableDate />
               // <CustomDatePicker />
-              : <div className='container__search__dates'> <DatePickerViews style={{ width: '280px' }} />
+              : <div className='container__search__dates'> 
+                <DatePickerViews/>
                 <FormPropsDatePickers />
               </div>
             }

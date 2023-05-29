@@ -8,7 +8,7 @@ export default function FormPropsDatePickers() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker', 'DatePicker']}>
-        <DatePicker label="disabled" disabled />
+        <DatePicker label="Regreso" disabled />
       </DemoContainer>
     </LocalizationProvider>
   );

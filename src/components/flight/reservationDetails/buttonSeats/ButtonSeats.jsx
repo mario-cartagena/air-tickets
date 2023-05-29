@@ -1,10 +1,16 @@
 import React from 'react';
 import './styleButtonSeats.scss';
+import { useNavigate } from 'react-router-dom';
 
-const ButtonSeats = ({nameButton}, ) => {
+const ButtonSeats = ({nameButton}) => {
+  const navigate = useNavigate();
+
+  const handleSelectedSeats = () => {
+    navigate('/seats');
+  }
   return (
     <>
-        <button className='btn__seats'>
+        <button onClick={handleSelectedSeats} className='btn__seats'>
             <span>{nameButton}</span>
         </button>
     </>
