@@ -36,13 +36,13 @@ function Search() {
 
   // ********************FUNCIÓN PARA RECIBIR LAS VARIABLES DE FECHA DESDE DATERANGE************************
 
-  const { selectedDate, filteredData, setFilteredData, selectedDateSimple, setSelectedDateSimple, departureInfo, arrivalInfo  } = useContext(AppContext);
+  const { selectedDate, filteredData, setFilteredData, selectedDateSimple, setSelectedDateSimple, departureInfo, arrivalInfo, departureInfoBaggage } = useContext(AppContext);
   const formatDate = (date) => {
     if (!date) return ''; // Manejo de fecha nula
 
     return dayjs(date.$d).format('YYYY-MM-DD')
   };
-
+console.log(departureInfoBaggage)
   console.log(departureInfo, arrivalInfo );
 
   const dateDepartureSelected = formatDate(selectedDate[0]);
@@ -342,7 +342,8 @@ function Search() {
               //  <BasicDateRangePicker/>
               <DateRangeValidationShouldDisableDate />
               // <CustomDatePicker />
-              : <div className='container__search__dates'> <DatePickerViews style={{ width: '280px' }} />
+              : <div className='container__search__dates'> 
+                <DatePickerViews/>
                 <FormPropsDatePickers />
               </div>
             }

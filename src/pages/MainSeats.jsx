@@ -9,14 +9,21 @@ import FlightServices from '../components/flight/reservationDetails/aditionalSer
 import ButtonSeats from '../components/flight/reservationDetails/buttonSeats/ButtonSeats'
 import FlightTUA from '../components/flight/reservationDetails/flightTUA/FlightTUA'
 import FlightTotal from '../components/flight/reservationDetails/flightTotal/FlightTotal'
+import { useNavigate } from 'react-router-dom';
 
 const MainSeats = () => {
+  const storedDataToFilter = sessionStorage.getItem('dataToFilter');
+  const parsedDataToFilter = JSON.parse(storedDataToFilter);
+  const navigate = useNavigate();
+  const handleToHome = () => {
+    navigate('/');
+  }
   return (
     <div className='seats'>
       <div className="seats__left">
         <div className='info__header'>
-          <TitleDetails/>
-          <ButtonEditFlight/>
+          <TitleDetails name={'salida'} date={parsedDataToFilter.dateDepartureSelected} departure={parsedDataToFilter.selectedDepartureAirport} arrival={parsedDataToFilter.selectedArrivalAirport} />
+          <ButtonEditFlight onClick={handleToHome}/>
         </div>
         <SelectSeats/>
       </div>

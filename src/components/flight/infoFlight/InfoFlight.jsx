@@ -3,8 +3,14 @@ import './styleInfoFlight.scss'
 import TitleDetails from './titleDetails/TitleDetails'
 import ItemFlight from './itemFlight/ItemFlight'
 import ButtonEditFlight from '../buttonEdtiFlight/ButtonEditFlight'
+import { useNavigate } from 'react-router-dom'
 
 const InfoFlight = () => {
+
+  const navigate = useNavigate();
+  const handleToHome = () => {
+    navigate('/');
+  }
 
   const storedFilteredDates = sessionStorage.getItem('filteredDates');
   const parsedFilteredDates = JSON.parse(storedFilteredDates);
@@ -21,14 +27,13 @@ const InfoFlight = () => {
       <div className='info'>
         <div className='info__header'>
           <TitleDetails name={'salida'} date={parsedDataToFilter.dateDepartureSelected} departure={parsedDataToFilter.selectedDepartureAirport} arrival={parsedDataToFilter.selectedArrivalAirport} />
-          <ButtonEditFlight />
+          <ButtonEditFlight onClick={handleToHome}/>
         </div>
         <div className='info__packages'>
           <p className='info__title'>Selección de horarios y equipajes</p>
           {parsedFilteredDates ?
             <ItemFlight data={parsedFilteredDates} name="departureFlight" />
             : ''}
-
         </div>
       </div>
       {parsedDataToFilter.dateArrivalSelected == undefined ? '' :
@@ -42,12 +47,10 @@ const InfoFlight = () => {
           <p className='info__title'>Selección de horarios y equipajes</p>
           {Object.entries(parsedFilteredDatesRound).length > 0 ? (
             <ItemFlight data={parsedFilteredDatesRound} name="arrivalFlight" />
-          ) : (
-            <h1>No hay vuelos Disponibles</h1>
+            ) : (
+              <h1>No hay vuelos Disponibles</h1>
           )}
         </div>
-     
-
       </div>
        }
     </>

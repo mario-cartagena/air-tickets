@@ -58,6 +58,12 @@
         margin-bottom: 1rem;
         gap: 1.3rem;
     }
+    
+    &__dates{
+        .css-10e3ze8-MuiStack-root, .css-1u3bzj6-MuiFormControl-root-MuiTextField-root{
+            width: 277px;
+        }
+    }
 
     &__date {
         border: 2px solid #d3cbcb;
