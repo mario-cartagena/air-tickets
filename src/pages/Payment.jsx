@@ -18,8 +18,8 @@ import CircularColor from '../components/common/CircularColor';
 
 const Payment = () => {
 
-    const storedpassengerInfoBooking = sessionStorage.getItem('passengerInfoBooking');
-    const parsedpassengerInfoBooking = JSON.parse(storedpassengerInfoBooking);
+    // const storedpassengerInfoBooking = sessionStorage.getItem('passengerInfoBooking');
+    // const parsedpassengerInfoBooking = JSON.parse(storedpassengerInfoBooking);
   const { responseBookingConfirmed, setResponseBookingConfirmed } = useContext(AppContext);
 
     const navigate = useNavigate();
@@ -74,7 +74,7 @@ const Payment = () => {
         infoSeatsDeparture,
         baggageDepartureInfo,
         baggageArrivalInfo,
-        parsedpassengerInfoBooking
+        // parsedpassengerInfoBooking
     }]
     
     console.log(bookingConfirmed);
