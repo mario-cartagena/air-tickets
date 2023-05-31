@@ -1,5 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { TextField, Button, MenuItem, FormControl, InputLabel, Select, Typography } from '@mui/material';
+import { useFormik } from 'formik';
+import * as Yup from "yup";
 import { AppContext } from '../../home/main/search/searchSchedule/appContext/AppContext';
 
 const genders = [
@@ -9,81 +11,105 @@ const genders = [
 ];
 
 const nationalityOptions = [
+    { value: 'colombia', label: 'Colombia' },
     { value: 'usa', label: 'Estados Unidos' },
     { value: 'canada', label: 'Canadá' },
     { value: 'uk', label: 'Reino Unido' },
-    // Otras opciones de nacionalidad
   ];
   
   const documentTypes = [
     { value: 'CC', label: 'Cédula de Ciudadanía' },
     { value: 'TI', label: 'Tarjeta de Identidad' },
     { value: 'PASSPORT', label: 'Pasaporte' },
-    // Otros tipos de documento
   ];
 
-const FormPassenger = ({key}) => {
-    const [nombre, setNombre] = useState('');
-    const [apellido, setApellido] = useState('');
-    const [fechaNacimiento, setFechaNacimiento] = useState('');
-    const [genero, setGenero] = useState('');
-    const [nacionalidad, setNacionalidad] = useState('');
-    const [tipoDocumento, setTipoDocumento] = useState('');
-    const [numeroDocumento, setNumeroDocumento] = useState('');
-    const [email, setEmail] = useState('');
-    const {  passengers, setPassengers  } = useContext(AppContext);
+const FormPassenger = () => {
+  const {  passengers, setPassengers  } = useContext(AppContext);
  
-    useEffect(() => {
-      sessionStorage.setItem('passengerInfoBooking', JSON.stringify(passengers));
-    }, [passengers]);
-    
-    const asingPassanger = (e) => {
-      e.preventDefault();
-     
-      const passengerInfoBooking = {
-        nombre,
-        apellido,
-        fechaNacimiento,
-        genero,
-        nacionalidad,
-        tipoDocumento,
-        numeroDocumento,
-        email,
-      };
-    
-      setPassengers((prev) => [...prev, passengerInfoBooking]);
+  useEffect(() => {
+    sessionStorage.setItem('passengerInfoBooking', JSON.stringify(passengers));
+  }, [passengers]);
 
-    };
-    
-    console.log(passengers);
+  let initialValues = {
+    nombre: "",
+    apellido: "",
+    fechaNacimiento: "",
+    genero: "",
+    nacionalidad: "",
+    tipoDocumento: "",
+    numeroDocumento: "",
+    email: ""
+  }
 
-    
+  const sendForm = (data) => {
+    console.log(data)
+    setPassengers((prev) => [...prev, data]);
+  }
+
+  const {handleSubmit, handleChange, values, errors} = useFormik({
+    initialValues: initialValues,
+    validationSchema: Yup.object({
+      nombre: Yup.string().matches(/^[a-zA-Z\s']+$/, 'El nombre del pasajero debe contener solo letras')
+      .min(3, 'El nombre del pasajero debe tener al menos 3 caracteres.')
+      .max(15, 'El nombre del pasajero no debe tener más de 15 caracteres.')
+      .required('El nombre del pasajero es obligatorio.'),
+      apellido: Yup.string().matches(/^[a-zA-Z\s']+$/, 'El apellido del pasajero debe contener solo letras')
+      .min(5, 'El apellido del pasajero debe tener al menos 3 caracteres.')
+      .max(15, 'El apellido del pasajero no debe tener más de 15 caracteres.')
+      .required('El apellido del pasajero es obligatorio.'),
+      fechaNacimiento:  Yup.string().required("La fecha es obligatoria."),
+      genero: Yup.string().required("Debes seleccionar un género."),
+      nacionalidad: Yup.string().required("Debes seleccionar una nacionalidad."),
+      tipoDocumento: Yup.string().required("Debes seleccionar un tipo de documento."),
+      numeroDocumento: Yup.string()
+      .matches(/^[0-9]+$/, 'El número de documento debe contener solo números')
+      .min(10, 'El número de documento debe tener al menos 10 caracteres')
+      .max(10, 'El número de documento no debe tener más de 10 caracteres')
+      .required('El número de documento es obligatorio'),
+      email: Yup.string().matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'El correo debe ser en formato: correo@dominio.com')
+      .email('El correo debe ser válido')
+      .required('El correo es obligatorio'),
+    }),
+    onSubmit: sendForm,
+  });
+
   return (
-    <form  className='form' key={key}>
+    <form onSubmit={handleSubmit} className='form'>
       <Typography variant='span'>Información de Contacto</Typography>
       <TextField
         label="Nombre"
-        value={nombre}
-        onChange={(e) => setNombre(e.target.value)}
-        required
+        name="nombre"
+        onChange={handleChange}
+        value={values.nombre}
+        error={errors.nombre}
+        helperText={errors.nombre}
       />
       <TextField
         label="Apellido"
-        value={apellido}
-        onChange={(e) => setApellido(e.target.value)}
-        required
+        name="apellido"
+        onChange={handleChange}
+        value={values.apellido}
+        error={errors.apellido}
+        helperText={errors.apellido}
       />
       <TextField
         label="Fecha de nacimiento"
         type="date"
-        value={fechaNacimiento}
-        onChange={(e) => setFechaNacimiento(e.target.value)}
-        required
+        name="fechaNacimiento"
+        onChange={handleChange}
+        value={values.fechaNacimiento}
+        error={errors.fechaNacimiento}
+        helperText={errors.fechaNacimiento}
         InputLabelProps={{ shrink: true }}
       />
-      <FormControl  required>
+      <FormControl >
         <InputLabel>Género</InputLabel>
-        <Select value={genero} onChange={(e) => setGenero(e.target.value)}>
+        <Select name="genero"
+        onChange={handleChange}
+        value={values.genero}
+        error={errors.genero}
+        helperText={errors.genero}
+        >
           {genders.map((gender) => (
             <MenuItem key={gender.value} value={gender.value}>
               {gender.label}
@@ -91,9 +117,14 @@ const FormPassenger = ({key}) => {
           ))}
         </Select>
       </FormControl>
-      <FormControl fullWidth required>
+      <FormControl fullWidth >
         <InputLabel>Nacionalidad</InputLabel>
-        <Select value={nacionalidad} onChange={(e) => setNacionalidad(e.target.value)}>
+        <Select name="nacionalidad"
+        onChange={handleChange}
+        value={values.nacionalidad}
+        error={errors.nacionalidad}
+        helperText={errors.nacionalidad}
+        >
           {nationalityOptions.map((option) => (
             <MenuItem key={option.value} value={option.value}>
               {option.label}
@@ -101,9 +132,14 @@ const FormPassenger = ({key}) => {
           ))}
         </Select>
       </FormControl>
-      <FormControl fullWidth required>
+      <FormControl fullWidth >
         <InputLabel>Tipo de documento</InputLabel>
-        <Select value={tipoDocumento} onChange={(e) => setTipoDocumento(e.target.value)}>
+        <Select  name="tipoDocumento"
+        onChange={handleChange}
+        value={values.tipoDocumento}
+        error={errors.tipoDocumento}
+        helperText={errors.tipoDocumento}
+        >
           {documentTypes.map((type) => (
             <MenuItem key={type.value} value={type.value}>
               {type.label}
@@ -113,18 +149,22 @@ const FormPassenger = ({key}) => {
       </FormControl>
       <TextField
         label="Número de documento"
-        value={numeroDocumento}
-        onChange={(e) => setNumeroDocumento(e.target.value)}
-        required
+        name="numeroDocumento"
+        onChange={handleChange}
+        value={values.numeroDocumento}
+        error={errors.numeroDocumento}
+        helperText={errors.numeroDocumento}
       />
       <TextField
         label="Email"
         type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
+        name="email"
+        onChange={handleChange}
+        value={values.email}
+        error={errors.email}
+        helperText={errors.email}
       />
-      <Button onClick={(e) => asingPassanger(e)} variant="contained" color="primary">
+      <Button type="submit" variant="contained" color="primary">
         Guardar
       </Button>
     </form>
