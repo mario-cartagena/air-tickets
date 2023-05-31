@@ -1,0 +1,30 @@
+.seats{
+    display: flex;
+    margin: 2.5rem auto;
+    width: 90%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    &__left{
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        width: 815px;
+    }
+
+    @media (max-width: 1115px) {
+        .seats{
+            &__right{
+                margin: 2.5rem auto;
+                width: 100%;
+            }
+        }
+    }
+    
+    @media (max-width: 850px) {
+        .flight{
+            &__right{
+                width: 100%;
+            }
+        }
+    }
+}

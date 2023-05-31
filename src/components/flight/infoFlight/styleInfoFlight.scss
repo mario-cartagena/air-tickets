@@ -1,0 +1,17 @@
+.info{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    &__header{
+        display: flex;
+        justify-content: space-between;
+    }
+    &__packages{
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+    &__title{
+        font-weight: 600;
+    }
+}

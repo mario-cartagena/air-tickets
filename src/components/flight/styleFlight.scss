@@ -1,0 +1,29 @@
+.flights{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 2.5rem auto;
+    width: 90%;
+    &__information{
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+    }
+}
+
+@media (max-width: 1115px) {
+    .flights{
+        &__reservation{
+            margin: 2.5rem auto;
+            width: 90%;
+        }
+    }
+}
+
+@media (max-width: 850px) {
+    .flights{
+        &__reservation{
+            width: 100%;
+        }
+    }
+}

@@ -1,0 +1,51 @@
+@import '../../../../../index.scss';
+.baggage{
+    display: flex;
+    gap: 10px;
+    &__personal, &__hand, &__25k{
+        border: 0.5px solid #afafaf;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        gap: 6px;
+        cursor: pointer;
+        width: 155px;
+        span {
+            font-size: 15px;
+            font-weight: 400;
+        }
+        &.active{
+            background: $colorPrimary;
+            color: #FFFF;
+            img{
+                filter: brightness(0) invert(1);
+            }
+        }
+    }
+    &__personal:hover, &__hand:hover, &__25k:hover{
+        color: #FFFF;
+        background: $colorPrimary;
+        img{
+            filter: brightness(0) invert(1);
+        }
+    }
+    &__price{
+        font-weight: bold !important;
+    }
+}
+
+
+/*********************Media Query***************************/
+
+@media (max-width: 580px) {
+    .baggage{
+        &__personal, &__hand, &__25k{
+            width: 100%;
+            span{
+                text-align: center;
+            }
+        }
+    }
+}

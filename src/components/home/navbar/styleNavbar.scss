@@ -1,0 +1,38 @@
+@import '../../../index.scss';
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $colorPrimary;
+    color: $colorSecondary;
+    padding: .1rem;
+    img {
+        width: 156px;
+        padding: 0 1rem;
+        cursor: pointer;
+    }
+
+&__button {
+    background-color: transparent;
+    border: 2px solid $colorSecondary;
+    border-radius: 18px;
+    padding: 6px 20px;
+    color: $colorSecondary;
+    cursor: pointer;
+        &:hover {
+        background-color: $colorSecondary;
+        color: $colorPrimary;
+    }
+}
+ul {
+    display: flex;
+    list-style: none;
+    padding: 0 1rem;
+}
+span {
+    margin-left: 0.8rem;
+    font-weight: 900;
+}
+}
+

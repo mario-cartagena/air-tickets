@@ -1,0 +1,33 @@
+// .form_select {
+//     // border: 2px solid #d3cbcb !important;
+// }
+
+.css-53dnub-MuiFormControl-root {
+    margin: 0 !important;
+    position: relative !important;
+    border: 2px solid #d3cbcb !important;
+    border-radius: 8px;
+}
+
+.css-1ka5eyc-MuiPaper-root-MuiMenu-paper-MuiPopover-paper {
+    opacity: 1;
+    transform: none;
+    min-width: 280px;
+    max-height: 224px;
+    width: 250px;
+    transition: opacity 288ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 192ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    //    position: absolute !important;
+    //     top: 480px !important;
+    left: 530px !important;
+    transform-origin: none;
+    transition: auto !important;
+    border-radius: 0 0 1rem 1rem !important;
+    overflow: inherit !important;
+
+}
+
+#demo-multiple-name-label {
+    top: 20px;
+    background-color: transparent;
+    border: none !important;
+}

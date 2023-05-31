@@ -1,0 +1,16 @@
+.mainServices{
+    margin: 0 auto;
+    width: 81%;
+    &__title{
+        line-height: 44px;
+        margin-bottom: 24px;
+    }
+    &__cards{
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+}

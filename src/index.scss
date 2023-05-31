@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;900&display=swap');
+$typografyFont: 'Lato', sans-serif;
+$colorPrimary: #A12985;
+$colorSecondary: #fff;
+$colorBackground: #f0f0f0;
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: $typografyFont;
+}
+
+// body{
+//     background: #f0f0f0;
+// }

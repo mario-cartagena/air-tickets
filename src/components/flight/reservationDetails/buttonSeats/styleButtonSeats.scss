@@ -1,0 +1,13 @@
+@import '../../../../index.scss';
+.btn__seats{
+    cursor: pointer;
+    background: $colorPrimary;
+    color: #FFFF;
+    border: 1px solid $colorPrimary;
+    border-radius: 20px;
+    padding: 7px 18px;
+    max-height: 40px;
+    span{
+        font-size: 15px;
+    }
+}

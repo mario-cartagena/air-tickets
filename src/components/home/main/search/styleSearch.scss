@@ -1,0 +1,347 @@
+@import '../../../../index.scss';
+
+.container__search {
+    position: relative;
+    background: #f7f7f7;
+    width: 640px;
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    margin-top: 40px;
+    margin-left: 130px;
+    margin-bottom: 3rem;
+
+    h3 {
+        font-size: 2rem;
+        line-height: 2rem;
+        margin-bottom: 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis,
+    }
+
+    // p {
+    //     margin-bottom: 1rem;
+    // }
+
+    &__option {
+        background: $colorSecondary;
+        border: 2px solid #d3cbcb;
+        width: 50%;
+        height: 40px;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-around;
+        padding: 5px;
+        border-radius: .3rem;
+        margin-top: 1rem;
+
+        button {
+            width: 50%;
+            border-radius: .3rem;
+            padding: 0 12px;
+            border: none;
+            background-color: $colorSecondary;
+
+            &.active {
+                background-color: $colorPrimary;
+                color: $colorSecondary;
+            }
+        }
+    }
+
+    &__cities,
+    &__dates,
+    &__passenger {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 1rem;
+        gap: 1.3rem;
+    }
+    
+    &__dates{
+        .css-10e3ze8-MuiStack-root, .css-1u3bzj6-MuiFormControl-root-MuiTextField-root{
+            width: 277px;
+        }
+    }
+
+    &__date {
+        border: 2px solid #d3cbcb;
+        border-radius: .3rem;
+        text-align: center;
+        color: #080206;
+        height: 50px;
+        width: 280px;
+        padding: 25px;
+
+    }
+
+    &__city {
+        border: 2px solid #d3cbcb;
+        border-radius: .3rem;
+        text-align: center;
+        display: block;
+        color: #080206;
+        height: 106px;
+        width: 280px;
+        padding: 25px;
+        cursor: pointer;
+
+        & h3 {
+            font-size: 1.5rem;
+            margin-bottom: 7px;
+        }
+    }
+
+    &__quantity {
+        border: 2px solid #d3cbcb;
+        border-radius: .3rem;
+        text-align: center;
+        color: #080206;
+        height: 50px;
+        width: 280px;
+        padding: 25px;
+        background-color: red;
+    }
+
+    &__coupon {
+        border: 2px solid #d3cbcb;
+        border-radius: .3rem;
+        text-align: center;
+        color: #080206;
+        height: 50px;
+        width: 100%;
+        padding: 25px;
+    }
+
+    &__button {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__btn {
+        background-color: $colorPrimary;
+        border-radius: 3rem;
+        width: 100%;
+        height: 3rem;
+        padding: 0 30px;
+        border: none;
+        color: $colorSecondary;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba(124, 4, 102, 0.9);
+        }
+
+        span {
+            transform: rotate(-45deg);
+            margin-left: 1rem;
+        }
+
+        &__plane {
+            margin: 1rem 1rem;
+        }
+    }
+}
+
+.container__img {
+    img {
+        width: 903px;
+        border-radius: 20px;
+        position: absolute;
+        right: 121px;
+        top: 115px;
+        height: 669px;
+    }
+}
+
+.container__searchQuantiy {
+    width: 280px;
+}
+
+.container__serchCoupon {
+    width: 280px;
+}
+
+.container__coupon {
+    width: 100%;
+}
+
+.css-78me8v-MuiFormControl-root {
+    margin: 0px !important;
+}
+
+// .css-15v22id-MuiAccordionDetails-root {
+//     position: absolute;
+//     left: 295px;
+//     top: 0px;
+//     background-color: #fff;
+//     z-index: 10000;
+//     border-radius: 0 0 1rem 1rem;
+// }
+
+
+/*********************Media Query***************************/
+
+@media (max-width: 658px) {
+
+    .container__img img {
+        width: 900px;
+        border-radius: 0px;
+        position: absolute;
+        right: 60px;
+        right: 0;
+        top: 0;
+        height: 248px;
+        z-index: -100;
+    }
+
+    .container__search {
+        margin: auto;
+        width: 80%;
+        margin-top: 2rem;
+
+        p {
+            margin-bottom: 0px;
+        }
+
+        padding: .8rem;
+
+        h3 {
+            font-size: 24px;
+        }
+
+        &__option {
+            width: 80%;
+
+            .button {
+                font-size: 10px;
+            }
+        }
+
+        &__cities {
+            flex-direction: column;
+
+        }
+
+        &__city {
+            display: flex;
+            flex-direction: column-reverse;
+            text-align: start;
+            padding: .8rem;
+            height: 75px;
+            width: auto;
+
+            h3 {
+                font-size: 1rem;
+                margin-bottom: 0px;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+
+        &__dates {
+            flex-direction: column;
+            width: auto;
+
+        }
+
+        &__passenger {
+            flex-direction: column;
+            width: auto;
+
+        }
+    }
+
+    .container__searchQuantiy {
+        width: auto;
+    }
+
+    .container__serchCoupon {
+        width: auto;
+    }
+
+}
+
+
+@media (min-width: 659px) and (max-width: 767.98px) {
+
+    .container {
+        &__img img {
+            width: 900px;
+            border-radius: 0px;
+            position: absolute;
+            right: 60px;
+            right: 0;
+            top: 0;
+            height: 248px;
+            z-index: -1;
+        }
+
+        &__search {
+            &__option {
+                width: 80%;
+            }
+
+            &__cities {
+                display: flex;
+                flex-direction: row;
+            }
+
+            &__dates {
+                width: auto;
+            }
+
+            &__passenger {
+                width: auto;
+            }
+        }
+
+        .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+            width: 100%;
+        }
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+
+    .container__img img {
+        width: 900px;
+        border-radius: 0px;
+        position: absolute;
+        right: 60px;
+        right: 0;
+        top: 0;
+        height: 248px;
+        z-index: -1;
+    }
+
+    .container__search {
+        margin: auto;
+        margin-top: 2rem;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+
+    .container__search {
+        margin: auto;
+        margin-top: 2rem;
+    }
+}
+
+// .css-15v22id-MuiAccordionDetails-root {
+//     position: absolute;
+//     left: 295px;
+//     top: -13px;
+//     background-color: #fff;
+//     z-index: 10000;
+// }

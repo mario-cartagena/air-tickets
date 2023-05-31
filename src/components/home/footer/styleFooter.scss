@@ -1,0 +1,28 @@
+.footer {
+  margin-top: 4rem;
+  background-color: #080206;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  h4 {
+    margin-bottom: 10px;
+  }
+  a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+  }
+  a:last-child {
+    color: white;
+    text-decoration: none;
+  }
+  img {
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  &__social{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
