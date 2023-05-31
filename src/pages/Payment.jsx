@@ -14,10 +14,12 @@ import FormPayment from '../components/payment/formPayment/FormPayment';
 import { useNavigate } from 'react-router-dom';
 import { postBooking } from '../services/postBooking';
 import { AppContext } from '../components/home/main/search/searchSchedule/appContext/AppContext';
+import CircularColor from '../components/common/CircularColor';
 
 const Payment = () => {
 
-    
+    const storedpassengerInfoBooking = sessionStorage.getItem('passengerInfoBooking');
+    const parsedpassengerInfoBooking = JSON.parse(storedpassengerInfoBooking);
   const { responseBookingConfirmed, setResponseBookingConfirmed } = useContext(AppContext);
 
     const navigate = useNavigate();
@@ -71,7 +73,8 @@ const Payment = () => {
         passengerInfoBooking,
         infoSeatsDeparture,
         baggageDepartureInfo,
-        baggageArrivalInfo
+        baggageArrivalInfo,
+        parsedpassengerInfoBooking
     }]
     
     console.log(bookingConfirmed);
@@ -80,17 +83,32 @@ const Payment = () => {
     const handleToFlightDetails = () => {
 
         postBooking(bookingConfirmed)
-            .then((response) => {
-                console.log(response);
-                sessionStorage.setItem('responseBookingConfirmed', JSON.stringify(response));
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        .then((response) => {
+          console.log(response);
+          sessionStorage.setItem('responseBookingConfirmed', JSON.stringify(response));
+          const storedresponseBookingConfirmed = sessionStorage.getItem('responseBookingConfirmed');
+          const bookingConfirmed = JSON.parse(storedresponseBookingConfirmed);
+          // Ejecutar una función después de 5 segundos usando setTimeout
+          const timeout = setTimeout(() => {
+            // Realizar alguna acción después de 5 segundos
+      
+            // Cambiar el estado o hacer cualquier otra operación necesaria
+            // Ejemplo: setColor("#FF0000");
+      
+            // Navegar a la página '/flightdetails'
+            navigate('/flightdetails');
+          }, 5000);
+      
+          // Renderizar el componente CircularColor
+          return <CircularColor />;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      
 
-
-         navigate('/flightdetails');
     }
+
 
 
     return (

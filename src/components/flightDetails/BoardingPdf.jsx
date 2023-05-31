@@ -14,7 +14,7 @@ const BoardingPdf = () => {
   } 
 
 
-  console.log(bookingConfirmed);
+  // console.log(bookingConfirmed);
 
 
 const styles = StyleSheet.create({
@@ -234,8 +234,9 @@ const data = [
   ] : [])
 ];
 
-const nombrePasajero = bookingConfirmed[0].passengerInfoBooking[0].nombre
+// const nombrePasajero = bookingConfirmed[0].passengerInfoBooking[0].nombre
 
+console.log(bookingConfirmed[0].passengerInfoBooking);
 
 const dataPassenger = [['Nombre de Pasajero', 'Documento de Identidad']];
 
