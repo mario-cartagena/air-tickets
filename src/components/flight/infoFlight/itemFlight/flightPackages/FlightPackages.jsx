@@ -25,13 +25,17 @@ const FlightPackages = ({ id, name, data }) => {
     if (flightConfirmed.name === 'departureFlight') {
       // console.log('soy departureFlight')
       setDepartureInfoBaggage(flightConfirmed)
+      sessionStorage.setItem('departureInfoBaggage', JSON.stringify(departureInfoBaggage));
     } else {
       // console.log('soy arrivalFlight')
       setArrivalInfoBaggage(flightConfirmed)
+      sessionStorage.setItem('arrivalInfoBaggage', JSON.stringify(arrivalInfoBaggage));
+
     }
   };
 
     console.log(departureInfoBaggage);
+
     console.log(arrivalInfoBaggage);
 
 

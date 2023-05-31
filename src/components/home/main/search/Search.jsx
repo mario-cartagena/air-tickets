@@ -149,7 +149,8 @@ console.log(departureInfoBaggage)
         dateDepartureSelected === '' ||
         dateArrivalSelected === '' ||
         countAdult === '' ||
-        countNiños === ''
+        countNiños === '' ||
+        countBebes === ''
       ) {
         console.log('Por favor seleccionar todos los campos');
       } else if (selectedDepartureAirport === selectedArrivalAirport) {
@@ -162,6 +163,7 @@ console.log(departureInfoBaggage)
           dateArrivalSelected,
           countAdult,
           countNiños,
+          countBebes,
           couponCode,
         });
         sessionStorage.setItem('dataToFilter', JSON.stringify(dataToFilter));
@@ -190,7 +192,7 @@ console.log(departureInfoBaggage)
           } else {
             console.log('resultados de busqueda salida', filteredDates)
             sessionStorage.setItem('filteredDates', JSON.stringify(filteredDates));
-            navigate('flight')
+            // navigate('flight')
           }
 
 
@@ -226,7 +228,8 @@ console.log(departureInfoBaggage)
           selectedArrivalAirport === '' ||
           dateDepartureSelectedSimple === '' ||
           countAdult === '' ||
-          countNiños === ''
+          countNiños === '' ||
+          countBebes === ''
         ) {
           console.log('Por favor seleccionar todos los campos');
         } else if (selectedDepartureAirport === selectedArrivalAirport) {
@@ -238,6 +241,7 @@ console.log(departureInfoBaggage)
             dateDepartureSelectedSimple,
             countAdult,
             countNiños,
+            countBebes,
             couponCode,
           });
           sessionStorage.setItem('dataToFilter', JSON.stringify(dataToFilter));
@@ -266,7 +270,7 @@ console.log(departureInfoBaggage)
             } else {
               console.log('resultados de busqueda salida', filteredDates)
               sessionStorage.setItem('filteredDates', JSON.stringify(filteredDates));
-              navigate('flight')
+              // navigate('flight')
             }
   
   
@@ -277,11 +281,15 @@ console.log(departureInfoBaggage)
       }
   };
 
-
+   const handleFormClick = (e) => {
+    e.stopPropagation(); 
+    console.log('Se hizo clic en el botón de buscar vuelos');
+    navigate('flight')
+  };
 
   return (
     <>
-      <form onSubmit={handleSubmit} className='form'>
+      <form onSubmit={handleSubmit} className='form'  >
         <div className='container__img'>
           <figure>
             <img src={imgPlane} alt="" />
@@ -388,7 +396,7 @@ console.log(departureInfoBaggage)
             </div>
           </div>
           <div className='container__search__button'>
-            <button type="submit" className='container__search__btn'><span><FontAwesomeIcon icon={faPlane} /></span><p className='container__search__btn__plane'>Buscar vuelos</p></button>
+            <button type="submit" onClick={handleFormClick} className='container__search__btn'><span><FontAwesomeIcon icon={faPlane} /></span><p className='container__search__btn__plane'>Buscar vuelos</p></button>
           </div>
         </section>
       </form>

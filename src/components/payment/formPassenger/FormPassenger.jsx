@@ -1,11 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { TextField, Button, MenuItem, FormControl, InputLabel, Select, Typography } from '@mui/material';
-import { DatePicker } from '@mui/x-date-pickers';
-import DatePickerViews from '../../home/main/search/searchSchedule/datePickerViews/DatePickerViews';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import { AppContext } from '../../home/main/search/searchSchedule/appContext/AppContext';
-
 
 const genders = [
     { value: 'male', label: 'Masculino' },
