@@ -16,6 +16,13 @@
             font-size: 15px;
             font-weight: 400;
         }
+        &.active{
+            background: $colorPrimary;
+            color: #FFFF;
+            img{
+                filter: brightness(0) invert(1);
+            }
+        }
     }
     &__personal:hover, &__hand:hover, &__25k:hover{
         color: #FFFF;
