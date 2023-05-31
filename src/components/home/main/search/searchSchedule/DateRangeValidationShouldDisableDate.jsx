@@ -54,18 +54,6 @@ export default function DateRangeValidationShouldDisableDate() {
           localeText={{ start: 'Salida', end: 'Regreso' }}
         />
       </LocalizationProvider>
-      <div>
-        {selectedDate[0] && (
-          <p>
-            <strong>Inicio:</strong> {formatDate(selectedDate[0])}
-          </p>
-        )}
-        {selectedDate[1] && (
-          <p>
-            <strong>Fin:</strong> {formatDate(selectedDate[1])}
-          </p>
-        )}
-      </div>
     </div>
   );
 }

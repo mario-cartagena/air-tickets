@@ -13,12 +13,23 @@ import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../components/home/main/search/searchSchedule/appContext/AppContext';
 
 const MainSeats = () => {
+
   const storedDataToFilter = sessionStorage.getItem('dataToFilter');
   const parsedDataToFilter = JSON.parse(storedDataToFilter);
-  const { selectedSeatCount, setSelectedSeatCount } = useContext(AppContext);
+  const { selectedSeatCount, setSelectedSeatCount, parsedArrivalInfoBaggage } = useContext(AppContext);
   const navigate = useNavigate();
   let totalPassengers = 0;
-  totalPassengers = (parsedDataToFilter.countAdult + parsedDataToFilter.countNiños + parsedDataToFilter.countNiños)
+  if (
+    !parsedArrivalInfoBaggage ||
+    Object.entries(parsedArrivalInfoBaggage).length === 0 ||
+    parsedArrivalInfoBaggage === 0
+  ) {
+    totalPassengers = parsedDataToFilter.countAdult + parsedDataToFilter.countNiños + parsedDataToFilter.countNiños;
+  } else {
+    totalPassengers = (parsedDataToFilter.countAdult + parsedDataToFilter.countNiños + parsedDataToFilter.countNiños) * 2;
+  }
+
+  // totalPassengers = (parsedDataToFilter.countAdult + parsedDataToFilter.countNiños + parsedDataToFilter.countNiños)
   console.log('total pasajeros', totalPassengers);
   console.log('total seleccionados', selectedSeatCount);
   const MAX_SELECTED_SEATS = totalPassengers; // Número máximo de asientos seleccionados permitidos
@@ -45,13 +56,17 @@ const MainSeats = () => {
         <div className='booking'>
           <FlightReservation />
           <FlightCost />
-          <FlightServices />
-          <FlightTUA />
-          <FlightTotal />
+          {/* <FlightServices />
+          <FlightTUA /> */}
           {(selectedSeatCount === MAX_SELECTED_SEATS) &&
-            <button onClick={handleToPayment} className='btn__seats'>
-              <span>Pagar con PayPal</span>
-            </button>
+            <>
+              <FlightServices />
+              <FlightTUA />
+              <FlightTotal />
+              <button onClick={handleToPayment} className='btn__seats'>
+                <span>Pagar con PayPal</span>
+              </button>
+            </>
           }
         </div>
       </div>
