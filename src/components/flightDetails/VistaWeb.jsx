@@ -12,7 +12,7 @@ const VistaWeb = () => {
   const [isConfettiActive, setIsConfettiActive] = useState(true);
   const storedresponseBookingConfirmed = sessionStorage.getItem('responseBookingConfirmed');
   const bookingConfirmed = JSON.parse(storedresponseBookingConfirmed);
-console.log(bookingConfirmed)
+// console.log(bookingConfirmed)
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -96,7 +96,7 @@ console.log(bookingConfirmed)
                 <span class="name">Nombre de Pasajero<br /><span>{e.passengerInfoBooking[index].nombre}</span><span style={{marginLeft:'10px'}}>{e.passengerInfoBooking[index].apellido}</span></span>
 
                 <span class="flight">Vuelo N&deg;<br /><span>{e.baggageDepartureInfo.data[0].flight_code}</span></span>
-                <span class="gate">GATE<br /><span>11B</span></span>
+                <span class="gate">GATE<br /><span>1</span></span>
                 <span class="seat">Asiento<br /><span>{e.infoSeatsDeparture[0]}</span></span>
                 <span class="boardingtime">Hora de abordaje<br /><span>{e.baggageDepartureInfo.data[0].departure_time}</span><span style={{marginLeft:'10px'}}>{e.baggageDepartureInfo.data[0].departure_date}</span></span>
 

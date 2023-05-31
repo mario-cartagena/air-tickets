@@ -3,7 +3,22 @@ import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/render
 import { AiOutlineInfoCircle } from 'react-icons/ai';
 import logo from '../../assets/img/logoVoladoresBg.png'
 
+const BoardingPdf = () => {
+
+  const storedresponseBookingConfirmed = sessionStorage.getItem('responseBookingConfirmed');
+  const bookingConfirmed = JSON.parse(storedresponseBookingConfirmed);
+  if (!bookingConfirmed ) {
+    // Handle the case when the necessary data is not available
+    return null;
+    
+  } 
+
+
+  console.log(bookingConfirmed);
+
+
 const styles = StyleSheet.create({
+
   page: {
     minHeight: '100vh',
     fontFamily: 'Helvetica',
@@ -200,116 +215,141 @@ const styles = StyleSheet.create({
     width: '220px',
   },
 });
+  
 
 const data = [
   ['N° Vuelo', 'Origen', 'Destino', 'Fecha de Salida', 'Hora', 'Fecha de Llegada', 'Hora',],
-  ['00ABC', 'MEDELLIN', 'BOGOTA', '2023-05-22', '09:00', '2023-05-22', '12:00'],
-
-  // ... agregar más filas de datos aquí
+  [bookingConfirmed[0].baggageDepartureInfo.data[0].flight_code, bookingConfirmed[0].baggageDepartureInfo.data[0].departure_airport.city, bookingConfirmed[0].baggageDepartureInfo.data[0].arrival_airport.city, bookingConfirmed[0].baggageDepartureInfo.data[0].departure_date, bookingConfirmed[0].baggageDepartureInfo.data[0].departure_time, bookingConfirmed[0].baggageDepartureInfo.data[0].arrival_date, bookingConfirmed[0].baggageDepartureInfo.data[0].arrival_time],
+  
+  ...(bookingConfirmed[0].baggageArrivalInfo ? [
+    [
+      bookingConfirmed[0].baggageArrivalInfo.data[0].flight_code,
+      bookingConfirmed[0].baggageArrivalInfo.data[0].departure_airport.city,
+      bookingConfirmed[0].baggageArrivalInfo.data[0].arrival_airport.city,
+      bookingConfirmed[0].baggageArrivalInfo.data[0].departure_date,
+      bookingConfirmed[0].baggageArrivalInfo.data[0].departure_time,
+      bookingConfirmed[0].baggageArrivalInfo.data[0].arrival_date,
+      bookingConfirmed[0].baggageArrivalInfo.data[0].arrival_time
+    ]
+  ] : [])
 ];
 
-const dataPassenger = [
-  ['Nombre de Pasajero', 'Documento de Identidad'],
-  ['Maria Antonieta Pereira', '5620369'],
+const nombrePasajero = bookingConfirmed[0].passengerInfoBooking[0].nombre
 
-  // ... agregar más filas de datos aquí
-];
 
-const BoardingPdf = () => {
-  return (
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.container}>
-          <Image style={styles.image} src={logo} />
-          <Text style={styles.boarding}>COMPROBANTE DE RESERVA N° <Text style={styles.boardingNumber}>XYZ123</Text></Text>
+const dataPassenger = [['Nombre de Pasajero', 'Documento de Identidad']];
 
+for (let i = 0; i < bookingConfirmed[0].passengerInfoBooking.length; i++) {
+  const passenger = bookingConfirmed[0].passengerInfoBooking[i];
+  const nombrePasajero = passenger.nombre;
+  const documentoIdentidad = passenger.numeroDocumento;
+  dataPassenger.push([nombrePasajero, documentoIdentidad]);
+}
+
+// ... agregar más filas de datos aquí
+
+// Utiliza `dataPassenger` en tu estructura de React PDF
+
+
+let ticketBookings = bookingConfirmed.map((e) => (
+
+    <Page size="A4" style={styles.page}>
+      <View style={styles.container}>
+        <Image style={styles.image} src={logo} />
+        <Text style={styles.boarding}>COMPROBANTE DE RESERVA N° <Text style={styles.boardingNumber}>XYZ123</Text></Text>
+
+      </View>
+      <View style={styles.infoBoarding}>
+        <Text style={styles.boarding}>Este documento contiene el detalle y condiciones del servicio que adquiriste.</Text>
+        <Text style={styles.boarding}>No es necesario que lo lleves el día de tu viaje.</Text>
+      </View>
+      <View style={styles.containerppl}>
+        <View style={styles.ticket}>
+          <View style={styles.infoPpl}>
+            <Text style={styles.infoTitle}>Información importante</Text>
+            <Text style={styles.title}>
+              <AiOutlineInfoCircle style={styles.icon} />
+            </Text>
+            <Text style={styles.info}>Considere que los tickets adquiridos están sujetos a restricciones gubernamentales, de los países donde operamos, y
+              deben ser aprobados por las autoridades locales.</Text>
+          </View>
         </View>
-        <View style={styles.infoBoarding}>
-          <Text style={styles.boarding}>Este documento contiene el detalle y condiciones del servicio que adquiriste.</Text>
-          <Text style={styles.boarding}>No es necesario que lo lleves el día de tu viaje.</Text>
-        </View>
-        <View style={styles.containerppl}>
-          <View style={styles.ticket}>
-            <View style={styles.infoPpl}>
-              <Text style={styles.infoTitle}>Información importante</Text>
-              <Text style={styles.title}>
-                <AiOutlineInfoCircle style={styles.icon} />
-              </Text>
-              <Text style={styles.info}>Considere que los tickets adquiridos están sujetos a restricciones gubernamentales, de los países donde operamos, y
-                deben ser aprobados por las autoridades locales.</Text>
+        <View style={styles.space}> </View>
+        <Text style={styles.airline}>Información de tu viaje:</Text>
+
+        <View style={styles.tablePassenger}>
+          {dataPassenger.map((row, rowIndex) => (
+            <View key={rowIndex} style={styles.tableRowPassenger}>
+              {row.map((cell, cellIndex) => (
+                <View key={cellIndex} style={rowIndex === 0 ? styles.tableCellHeaderPassenger : styles.tableCellPassenger}>
+                  <Text>{cell}</Text>
+                </View>
+              ))}
             </View>
-          </View>
-          <View style={styles.space}> </View>
-          <Text style={styles.airline}>Información de tu viaje:</Text>
-
-          <View style={styles.tablePassenger}>
-            {dataPassenger.map((row, rowIndex) => (
-              <View key={rowIndex} style={styles.tableRowPassenger}>
-                {row.map((cell, cellIndex) => (
-                  <View key={cellIndex} style={rowIndex === 0 ? styles.tableCellHeaderPassenger : styles.tableCellPassenger}>
-                    <Text>{cell}</Text>
-                  </View>
-                ))}
-              </View>
-            ))}
-          </View>
-
-          <View style={styles.table}>
-            {data.map((row, rowIndex) => (
-              <View key={rowIndex} style={styles.tableRow}>
-                {row.map((cell, cellIndex) => (
-                  <View key={cellIndex} style={rowIndex === 0 ? styles.tableCellHeader : styles.tableCell}>
-                    <Text>{cell}</Text>
-                  </View>
-                ))}
-              </View>
-            ))}
-          </View>
-          <View style={styles.space}> </View>
-          <View style={styles.space}> </View>
-
-          <View style={styles.ticket}>
-            <Text style={styles.info}>
-              <Text style={styles.infoTitle}>VIGENCIA DEL PASAJE:  </Text>
-              <Text style={styles.paragraph}>
-                Si tu tarifa no permite cambios ni devoluciones, sólo aplican las fechas de salida y llegada correspondientes al itinerario de tu viaje.
-                Si tu tarifa permite cambios y/o devoluciones, la vigencia de tu pasaje es de 1 año a contar de la fecha de emisión. Sin embargo, una vez iniciado viaje, tu pasaje
-                vence al cumplirse la estadía máxima o la última fecha de viaje que tu tarifa permite
-              </Text>
-            </Text>
-            <View style={styles.spaceDark}> </View>
-            <Text style={styles.info}>
-              <Text style={styles.infoTitle}>DESISTIMIENTO:  </Text>
-              <Text style={styles.paragraph}>
-                En aplicación del artículo 1878 del Código de Comercio, el pasajero podrá desistir del viaje antes de su iniciación, dando aviso al
-                transportador o a la agencia de viajes con al menos veinticuatro (24) horas de antelación a la realización del vuelo. En estos casos, el transportador o agencia de
-                viajes, podrá retener una suma de dinero, de acuerdo con lo regulado en el presente numeral. El transportador o agencia de viajes, de acuerdo con las condiciones
-                de la tarifa, podrá retener el porcentaje pactado, el cual no podrá ser superior al 10% del valor recibido por concepto de tarifa, excluyendo tasas, impuestos y
-                tarifa administrativa. La retención que se hace al pasajero se efectuará a favor del transportador. Lo dispuesto en el presente numeral no aplicará cuando se
-                trate de tarifas promocionales, salvo que sea ofrecido por el transportador, en cuyo evento se aplicará de conformidad con las condiciones ofrecidas. La aerolínea
-                y/o agente de viajes, deberá reembolsar el dinero al pasajero en un plazo máximo de treinta (30) días calendario a partir de la comunicación del desistimiento.
-              </Text>
-              
-            </Text>
-            <View style={styles.spaceDark}> </View>
-            <Text style={styles.info}>
-              <Text style={styles.infoTitle}>RETRACTO:  </Text>
-              <Text style={styles.paragraph}>
-                Para compras realizadas a partir del 12 de diciembre de 2019, el Derecho de Retracto aplicará:(i) Para compras realizadas por medios no
-                tradicionales o a distancia (Contact Center y/o Página Web), (ii) El término máximo para ejercer el derecho de retracto será de cinco (5) días hábiles contados a
-                partir del día de la compra del tiquete aéreo, (iii) Aplica, siempre y cuando el servicio no haya tenido que ejecutarse durante los mismos cinco (5) días hábiles,
-                (iv) No se generará retención alguna, procederá la devolución total, y (v) No procede devolución de tarifa administrativa, de conformidad con lo establecido en la
-                Resolución 3596 de 2006.Para compras realizadas antes del 12 de diciembre de 2019, aplicará el Derecho de Retracto estipulado en los Reglamentos
-                Aeronáuticos de Colombia:(i) Para las ventas efectuadas a través de métodos no tradicionales o a distancia a los cuales se refiere el Decreto 1499 de 2014,(ii) El
-                retracto deberá ser ejercido a través de cualquier canal de atención del vendedor, dentro de las cuarenta y ocho (48)horas corrientes siguientes a la operación de
-                la compra,(iii) El retracto sólo podrá ser ejercido con una anterioridad igual o mayor a ocho (8) días calendario entre el momento de su ejercicio oportuno y la
-                fecha prevista para el inicio de la prestación del servicio para operaciones nacionales.
-              </Text>
-            </Text>
-          </View>
-
+          ))}
         </View>
-      </Page>
+
+        <View style={styles.table}>
+          {data.map((row, rowIndex) => (
+            <View key={rowIndex} style={styles.tableRow}>
+              {row.map((cell, cellIndex) => (
+                <View key={cellIndex} style={rowIndex === 0 ? styles.tableCellHeader : styles.tableCell}>
+                  <Text>{cell}</Text>
+                </View>
+              ))}
+            </View>
+          ))}
+        </View>
+        <View style={styles.space}> </View>
+        <View style={styles.space}> </View>
+
+        <View style={styles.ticket}>
+          <Text style={styles.info}>
+            <Text style={styles.infoTitle}>VIGENCIA DEL PASAJE:  </Text>
+            <Text style={styles.paragraph}>
+              Si tu tarifa no permite cambios ni devoluciones, sólo aplican las fechas de salida y llegada correspondientes al itinerario de tu viaje.
+              Si tu tarifa permite cambios y/o devoluciones, la vigencia de tu pasaje es de 1 año a contar de la fecha de emisión. Sin embargo, una vez iniciado viaje, tu pasaje
+              vence al cumplirse la estadía máxima o la última fecha de viaje que tu tarifa permite
+            </Text>
+          </Text>
+          <View style={styles.spaceDark}> </View>
+          <Text style={styles.info}>
+            <Text style={styles.infoTitle}>DESISTIMIENTO:  </Text>
+            <Text style={styles.paragraph}>
+              En aplicación del artículo 1878 del Código de Comercio, el pasajero podrá desistir del viaje antes de su iniciación, dando aviso al
+              transportador o a la agencia de viajes con al menos veinticuatro (24) horas de antelación a la realización del vuelo. En estos casos, el transportador o agencia de
+              viajes, podrá retener una suma de dinero, de acuerdo con lo regulado en el presente numeral. El transportador o agencia de viajes, de acuerdo con las condiciones
+              de la tarifa, podrá retener el porcentaje pactado, el cual no podrá ser superior al 10% del valor recibido por concepto de tarifa, excluyendo tasas, impuestos y
+              tarifa administrativa. La retención que se hace al pasajero se efectuará a favor del transportador. Lo dispuesto en el presente numeral no aplicará cuando se
+              trate de tarifas promocionales, salvo que sea ofrecido por el transportador, en cuyo evento se aplicará de conformidad con las condiciones ofrecidas. La aerolínea
+              y/o agente de viajes, deberá reembolsar el dinero al pasajero en un plazo máximo de treinta (30) días calendario a partir de la comunicación del desistimiento.
+            </Text>
+
+          </Text>
+          <View style={styles.spaceDark}> </View>
+          <Text style={styles.info}>
+            <Text style={styles.infoTitle}>RETRACTO:  </Text>
+            <Text style={styles.paragraph}>
+              Para compras realizadas a partir del 12 de diciembre de 2019, el Derecho de Retracto aplicará:(i) Para compras realizadas por medios no
+              tradicionales o a distancia (Contact Center y/o Página Web), (ii) El término máximo para ejercer el derecho de retracto será de cinco (5) días hábiles contados a
+              partir del día de la compra del tiquete aéreo, (iii) Aplica, siempre y cuando el servicio no haya tenido que ejecutarse durante los mismos cinco (5) días hábiles,
+              (iv) No se generará retención alguna, procederá la devolución total, y (v) No procede devolución de tarifa administrativa, de conformidad con lo establecido en la
+              Resolución 3596 de 2006.Para compras realizadas antes del 12 de diciembre de 2019, aplicará el Derecho de Retracto estipulado en los Reglamentos
+              Aeronáuticos de Colombia:(i) Para las ventas efectuadas a través de métodos no tradicionales o a distancia a los cuales se refiere el Decreto 1499 de 2014,(ii) El
+              retracto deberá ser ejercido a través de cualquier canal de atención del vendedor, dentro de las cuarenta y ocho (48)horas corrientes siguientes a la operación de
+              la compra,(iii) El retracto sólo podrá ser ejercido con una anterioridad igual o mayor a ocho (8) días calendario entre el momento de su ejercicio oportuno y la
+              fecha prevista para el inicio de la prestación del servicio para operaciones nacionales.
+            </Text>
+          </Text>
+        </View>
+
+      </View>
+    </Page>
+))
+  return (
+
+    <Document>
+          {ticketBookings}
     </Document>
   );
 };
