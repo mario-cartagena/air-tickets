@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TextField, Button, MenuItem, FormControl, InputLabel, Select, Typography } from '@mui/material';
+import { AppContext } from '../../home/main/search/searchSchedule/appContext/AppContext';
 
 const genders = [
     { value: 'male', label: 'Masculino' },
@@ -21,7 +22,7 @@ const nationalityOptions = [
     // Otros tipos de documento
   ];
 
-const FormPassenger = () => {
+const FormPassenger = ({key}) => {
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
     const [fechaNacimiento, setFechaNacimiento] = useState('');
@@ -30,22 +31,35 @@ const FormPassenger = () => {
     const [tipoDocumento, setTipoDocumento] = useState('');
     const [numeroDocumento, setNumeroDocumento] = useState('');
     const [email, setEmail] = useState('');
+    const {  passengers, setPassengers  } = useContext(AppContext);
+ 
+    useEffect(() => {
+      sessionStorage.setItem('passengerInfoBooking', JSON.stringify(passengers));
+    }, [passengers]);
+    
+    const asingPassanger = (e) => {
+      e.preventDefault();
+     
+      const passengerInfoBooking = {
+        nombre,
+        apellido,
+        fechaNacimiento,
+        genero,
+        nacionalidad,
+        tipoDocumento,
+        numeroDocumento,
+        email,
+      };
+    
+      setPassengers((prev) => [...prev, passengerInfoBooking]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Datos del formulario:', {
-          nombre,
-          apellido,
-          fechaNacimiento,
-          genero,
-          nacionalidad,
-          tipoDocumento,
-          numeroDocumento,
-          email,
-        });
     };
+    
+    console.log(passengers);
+
+    
   return (
-    <form onSubmit={handleSubmit} className='form'>
+    <form  className='form' key={key}>
       <Typography variant='span'>Información de Contacto</Typography>
       <TextField
         label="Nombre"
@@ -110,7 +124,7 @@ const FormPassenger = () => {
         onChange={(e) => setEmail(e.target.value)}
         required
       />
-      <Button type="submit" variant="contained" color="primary">
+      <Button onClick={(e) => asingPassanger(e)} variant="contained" color="primary">
         Guardar
       </Button>
     </form>

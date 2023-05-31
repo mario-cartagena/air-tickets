@@ -3,14 +3,14 @@ import './stylesRowSeats.scss';
 import { GetFlights } from '../../../services/GetFlights';
 import { AppContext } from '../../home/main/search/searchSchedule/appContext/AppContext';
 
-const RowSeats = ({ number, selectedSeatCount, setSelectedSeatCount }) => {
+const RowSeatsDeparture = ({ number, selectedSeatCount, setSelectedSeatCount }) => {
   const [flights, setFlights] = useState([]);
   const [seatStatuses, setSeatStatuses] = useState({});
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [selectedSeatsByRow, setSelectedSeatsByRow] = useState({});
-  const { departureInfoBaggage, arrivalInfoBaggage,parsedArrivalInfoBaggage, parsedDepartureInfoBaggage  } = useContext(AppContext);
-  // console.log(parsedDepartureInfoBaggage)  
-  const flighToFilter = parsedArrivalInfoBaggage.flightId
+  const { departureInfoBaggage, arrivalInfoBaggage, parsedDepartureInfoBaggage  } = useContext(AppContext);
+//   console.log(parsedDepartureInfoBaggage)  
+  const flighToFilter = parsedDepartureInfoBaggage.flightId
   const flightFiltered = flights.find((e) => e.id == flighToFilter)
  
   const handleSeat = useCallback((key) => {
@@ -111,36 +111,20 @@ const RowSeats = ({ number, selectedSeatCount, setSelectedSeatCount }) => {
 
 
   const [arrayAsientosSeleccionados, setArrayAsientosSeleccionados] = useState([]);
-  const [seatRow1, setSeatRow1] = useState('');
-  const [seatRow2, setSeatRow2] = useState('');
-  const [seatRow3, setSeatRow3] = useState('');
-  const [seatRow4, setSeatRow4] = useState('');
-  const [seatRow5, setSeatRow5] = useState('');
-  const [seatRow6, setSeatRow6] = useState('');
-  const [seatRow7, setSeatRow7] = useState('');
-  const [seatRow8, setSeatRow8] = useState('');
-  const [seatRow9, setSeatRow9] = useState('');
-  const [seatRow10, setSeatRow10] = useState('');
+  const [seatRowDeparture1, setSeatRowDeparture1] = useState('');
+  const [seatRowDeparture2, setSeatRowDeparture2] = useState('');
+  const [seatRowDeparture3, setSeatRowDeparture3] = useState('');
+  const [seatRowDeparture4, setSeatRowDeparture4] = useState('');
+  const [seatRowDeparture5, setSeatRowDeparture5] = useState('');
+  const [seatRowDeparture6, setSeatRowDeparture6] = useState('');
+  const [seatRowDeparture7, setSeatRowDeparture7] = useState('');
+  const [seatRowDeparture8, setSeatRowDeparture8] = useState('');
+  const [seatRowDeparture9, setSeatRowDeparture9] = useState('');
+  const [seatRowDeparture10, setSeatRowDeparture10] = useState('');
  const [objetoAsientos, setObjetoAsientos] = useState([])
 
 
-  // const seatsInfo = {
-  //   seatRow1,
-  //   seatRow2,
-  //   seatRow3,
-  //   seatRow4,
-  //   seatRow5,
-  //   seatRow6,
-  //   seatRow7,
-  //   seatRow8,
-  //   seatRow9,
-  //   seatRow10
-  //  }
-  //  console.log(seatsInfo)
-   
-        // setAsientos((prev) => [...prev, seatsInfo]);
-        // sessionStorage.setItem('asientos', JSON.stringify(seatsInfo));
-  
+
  
 
  useEffect(() => {
@@ -150,26 +134,26 @@ const RowSeats = ({ number, selectedSeatCount, setSelectedSeatCount }) => {
    // Verificar la fila seleccionada y realizar acciones específicas
    Object.keys(selectedSeatsByRow).forEach((key) => {
      if (key === '1') {
-      setSeatRow1(selectedSeatsByRow[key]);    
+      setSeatRowDeparture1(selectedSeatsByRow[key]);    
      } else if (key === '2') {
-       setSeatRow2(selectedSeatsByRow[key]); 
+       setSeatRowDeparture2(selectedSeatsByRow[key]); 
  
       } else if (key === '3') {
-       setSeatRow3(selectedSeatsByRow[key]); 
+       setSeatRowDeparture3(selectedSeatsByRow[key]); 
      } else if (key === '4') {
-       setSeatRow4(selectedSeatsByRow[key]); 
+       setSeatRowDeparture4(selectedSeatsByRow[key]); 
      } else if (key === '5') {
-       setSeatRow5(selectedSeatsByRow[key]); 
+       setSeatRowDeparture5(selectedSeatsByRow[key]); 
      }  else if (key === '6') {
-       setSeatRow6(selectedSeatsByRow[key]); 
+       setSeatRowDeparture6(selectedSeatsByRow[key]); 
      } else if (key === '7') {
-      setSeatRow7(selectedSeatsByRow[key]); 
+      setSeatRowDeparture7(selectedSeatsByRow[key]); 
     } else if (key === '8') {
-      setSeatRow8(selectedSeatsByRow[key]); 
+      setSeatRowDeparture8(selectedSeatsByRow[key]); 
     } else if (key === '9') {
-      setSeatRow9(selectedSeatsByRow[key]); 
+      setSeatRowDeparture9(selectedSeatsByRow[key]); 
     } else if (key === '10') {
-      setSeatRow10(selectedSeatsByRow[key]); 
+      setSeatRowDeparture10(selectedSeatsByRow[key]); 
     }
    });
  
@@ -177,37 +161,37 @@ const RowSeats = ({ number, selectedSeatCount, setSelectedSeatCount }) => {
 
 
   useEffect(() => {
-    sessionStorage.setItem('seatRow1', JSON.stringify(seatRow1));
-    }, [seatRow1]);
+    sessionStorage.setItem('seatRowDeparture1', JSON.stringify(seatRowDeparture1));
+    }, [seatRowDeparture1]);
   
   useEffect(() => {
-    sessionStorage.setItem('seatRow2', JSON.stringify(seatRow2));
-  }, [seatRow2]);
+    sessionStorage.setItem('seatRowDeparture2', JSON.stringify(seatRowDeparture2));
+  }, [seatRowDeparture2]);
 
   useEffect(() => {
-    sessionStorage.setItem('seatRow3', JSON.stringify(seatRow3));
-  }, [seatRow3]);
+    sessionStorage.setItem('seatRowDeparture3', JSON.stringify(seatRowDeparture3));
+  }, [seatRowDeparture3]);
   useEffect(() => {
-    sessionStorage.setItem('seatRow4', JSON.stringify(seatRow4));
-  }, [seatRow4]);
+    sessionStorage.setItem('seatRowDeparture4', JSON.stringify(seatRowDeparture4));
+  }, [seatRowDeparture4]);
   useEffect(() => {
-    sessionStorage.setItem('seatRow5', JSON.stringify(seatRow5));
-  }, [seatRow5]);
+    sessionStorage.setItem('seatRowDeparture5', JSON.stringify(seatRowDeparture5));
+  }, [seatRowDeparture5]);
   useEffect(() => {
-    sessionStorage.setItem('seatRow6', JSON.stringify(seatRow6));
-  }, [seatRow6]);
+    sessionStorage.setItem('seatRowDeparture6', JSON.stringify(seatRowDeparture6));
+  }, [seatRowDeparture6]);
   useEffect(() => {
-    sessionStorage.setItem('seatRow7', JSON.stringify(seatRow7));
-  }, [seatRow7]);
+    sessionStorage.setItem('seatRowDeparture7', JSON.stringify(seatRowDeparture7));
+  }, [seatRowDeparture7]);
   useEffect(() => {
-    sessionStorage.setItem('seatRow8', JSON.stringify(seatRow8));
-  }, [seatRow8]);
+    sessionStorage.setItem('seatRowDeparture8', JSON.stringify(seatRowDeparture8));
+  }, [seatRowDeparture8]);
   useEffect(() => {
-    sessionStorage.setItem('seatRow9', JSON.stringify(seatRow9));
-  }, [seatRow9]);
+    sessionStorage.setItem('seatRowDeparture9', JSON.stringify(seatRowDeparture9));
+  }, [seatRowDeparture9]);
   useEffect(() => {
-    sessionStorage.setItem('seatRow10', JSON.stringify(seatRow10));
-  }, [seatRow10]);
+    sessionStorage.setItem('seatRowDeparture10', JSON.stringify(seatRowDeparture10));
+  }, [seatRowDeparture10]);
 
   return (
     <>
@@ -246,4 +230,4 @@ const RowSeats = ({ number, selectedSeatCount, setSelectedSeatCount }) => {
   );
 };
 
-export default RowSeats;
+export default RowSeatsDeparture;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import '../components/mainSeats/styleMainSeats.scss';
 import SelectSeats from '../components/selectSeats/SelectSeats'
 import TitleDetails from '../components/flight/infoFlight/titleDetails/TitleDetails'
@@ -10,35 +10,53 @@ import ButtonSeats from '../components/flight/reservationDetails/buttonSeats/But
 import FlightTUA from '../components/flight/reservationDetails/flightTUA/FlightTUA'
 import FlightTotal from '../components/flight/reservationDetails/flightTotal/FlightTotal'
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../components/home/main/search/searchSchedule/appContext/AppContext';
 
 const MainSeats = () => {
   const storedDataToFilter = sessionStorage.getItem('dataToFilter');
   const parsedDataToFilter = JSON.parse(storedDataToFilter);
+  const { selectedSeatCount, setSelectedSeatCount } = useContext(AppContext);
   const navigate = useNavigate();
+  let totalPassengers = 0;
+  totalPassengers = (parsedDataToFilter.countAdult + parsedDataToFilter.countNiños + parsedDataToFilter.countNiños)
+  console.log('total pasajeros', totalPassengers);
+  console.log('total seleccionados', selectedSeatCount);
+  const MAX_SELECTED_SEATS = totalPassengers; // Número máximo de asientos seleccionados permitidos
+  console.log(MAX_SELECTED_SEATS);
+
   const handleToHome = () => {
     navigate('/');
   }
+
+  const handleToPayment = () => {
+    navigate('/payment');
+  }
+
   return (
     <div className='seats'>
       <div className="seats__left">
         <div className='info__header'>
           <TitleDetails name={'salida'} date={parsedDataToFilter.dateDepartureSelected} departure={parsedDataToFilter.selectedDepartureAirport} arrival={parsedDataToFilter.selectedArrivalAirport} />
-          <ButtonEditFlight onClick={handleToHome}/>
+          <ButtonEditFlight onClick={handleToHome} />
         </div>
-        <SelectSeats/>
+        <SelectSeats />
       </div>
       <div className="seats__right">
         <div className='booking'>
-          <FlightReservation/>
-          <FlightCost/>
-          <FlightServices/>
-          <FlightTUA/>
-          <FlightTotal/>
-          <ButtonSeats nameButton="Pagar con PayPal"/>
+          <FlightReservation />
+          <FlightCost />
+          <FlightServices />
+          <FlightTUA />
+          <FlightTotal />
+          {(selectedSeatCount === MAX_SELECTED_SEATS) &&
+            <button onClick={handleToPayment} className='btn__seats'>
+              <span>Pagar con PayPal</span>
+            </button>
+          }
         </div>
       </div>
     </div>
-    
+
   )
 }
 

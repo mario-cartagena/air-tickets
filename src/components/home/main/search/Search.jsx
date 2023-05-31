@@ -36,14 +36,14 @@ function Search() {
 
   // ********************FUNCIÓN PARA RECIBIR LAS VARIABLES DE FECHA DESDE DATERANGE************************
 
-  const { selectedDate, filteredData, setFilteredData, selectedDateSimple, setSelectedDateSimple, departureInfoBaggage, arrivalInfoBaggage  } = useContext(AppContext);
+  const { selectedDate, filteredData, setFilteredData, selectedDateSimple, setSelectedDateSimple, departureInfo, arrivalInfo, departureInfoBaggage } = useContext(AppContext);
   const formatDate = (date) => {
     if (!date) return ''; // Manejo de fecha nula
 
     return dayjs(date.$d).format('YYYY-MM-DD')
   };
-
-  // console.log(departureInfo, arrivalInfo );
+console.log(departureInfoBaggage)
+  console.log(departureInfo, arrivalInfo );
 
   const dateDepartureSelected = formatDate(selectedDate[0]);
   console.log('selectedDate departure en Search:', dateDepartureSelected);
@@ -149,7 +149,8 @@ function Search() {
         dateDepartureSelected === '' ||
         dateArrivalSelected === '' ||
         countAdult === '' ||
-        countNiños === ''
+        countNiños === '' ||
+        countBebes === ''
       ) {
         console.log('Por favor seleccionar todos los campos');
       } else if (selectedDepartureAirport === selectedArrivalAirport) {
@@ -162,6 +163,7 @@ function Search() {
           dateArrivalSelected,
           countAdult,
           countNiños,
+          countBebes,
           couponCode,
         });
         sessionStorage.setItem('dataToFilter', JSON.stringify(dataToFilter));
@@ -190,7 +192,7 @@ function Search() {
           } else {
             console.log('resultados de busqueda salida', filteredDates)
             sessionStorage.setItem('filteredDates', JSON.stringify(filteredDates));
-            navigate('flight')
+            // navigate('flight')
           }
 
 
@@ -226,7 +228,8 @@ function Search() {
           selectedArrivalAirport === '' ||
           dateDepartureSelectedSimple === '' ||
           countAdult === '' ||
-          countNiños === ''
+          countNiños === '' ||
+          countBebes === ''
         ) {
           console.log('Por favor seleccionar todos los campos');
         } else if (selectedDepartureAirport === selectedArrivalAirport) {
@@ -238,6 +241,7 @@ function Search() {
             dateDepartureSelectedSimple,
             countAdult,
             countNiños,
+            countBebes,
             couponCode,
           });
           sessionStorage.setItem('dataToFilter', JSON.stringify(dataToFilter));
@@ -266,7 +270,7 @@ function Search() {
             } else {
               console.log('resultados de busqueda salida', filteredDates)
               sessionStorage.setItem('filteredDates', JSON.stringify(filteredDates));
-              navigate('flight')
+              // navigate('flight')
             }
   
   
@@ -277,11 +281,15 @@ function Search() {
       }
   };
 
-
+   const handleFormClick = (e) => {
+    e.stopPropagation(); 
+    console.log('Se hizo clic en el botón de buscar vuelos');
+    navigate('flight')
+  };
 
   return (
     <>
-      <form onSubmit={handleSubmit} className='form'>
+      <form onSubmit={handleSubmit} className='form'  >
         <div className='container__img'>
           <figure>
             <img src={imgPlane} alt="" />
@@ -388,7 +396,7 @@ function Search() {
             </div>
           </div>
           <div className='container__search__button'>
-            <button type="submit" className='container__search__btn'><span><FontAwesomeIcon icon={faPlane} /></span><p className='container__search__btn__plane'>Buscar vuelos</p></button>
+            <button type="submit" onClick={handleFormClick} className='container__search__btn'><span><FontAwesomeIcon icon={faPlane} /></span><p className='container__search__btn__plane'>Buscar vuelos</p></button>
           </div>
         </section>
       </form>
