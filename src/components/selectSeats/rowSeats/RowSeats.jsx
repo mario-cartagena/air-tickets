@@ -18,7 +18,7 @@ const RowSeats = ({ number, selectedSeatCount, setSelectedSeatCount }) => {
     // console.log(flights)
     flights.forEach((item) => {
       // console.log(item.id);
-      const result = flightFiltered.seats.find((element) => element.id === key);
+      const result = flightFiltered?.seats?.find((element) => element.id === key);
       if (result && result.status) {
         if (result.status.available) {
           setSeatStatuses((prevStatuses) => ({

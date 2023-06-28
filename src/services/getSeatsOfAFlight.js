@@ -15,4 +15,4 @@ export const getSeatsOfAFlight = async () => {
     }
 }
 
-getSeatsOfAFlight()
+//getSeatsOfAFlight()

@@ -15,4 +15,4 @@ export const getBooking = async () => {
     }
 }
 
-getBooking()
+//getBooking()

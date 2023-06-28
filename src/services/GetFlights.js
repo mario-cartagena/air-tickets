@@ -15,4 +15,4 @@ export const GetFlights = async () => {
     }
 }
 
-GetFlights()
+//GetFlights()
