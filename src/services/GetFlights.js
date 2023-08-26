@@ -1,5 +1,6 @@
 import axios from "axios";
-const URL = "https://tickets-backend.herokuapp.com/";
+//const URL = "https://tickets-backend.herokuapp.com/";
+const URL = "https://ticketsbackend.onrender.com/";
 
 const endpointFlights = "flights";
 

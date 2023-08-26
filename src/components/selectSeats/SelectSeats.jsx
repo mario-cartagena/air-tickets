@@ -7,29 +7,30 @@ import RowSeatsDeparture from './rowSeats/RowSeatsDeparture';
 
 const SelectSeats = () => {
   const { selectedSeatCount, setSelectedSeatCount, parsedArrivalInfoBaggage } = useContext(AppContext);
+  console.log(selectedSeatCount, 'selected');
   const storedDataToFilter = sessionStorage.getItem('dataToFilter');
   const parsedDataToFilter = JSON.parse(storedDataToFilter);
 
   let totalPassengers 
 
-  if (
-    !parsedArrivalInfoBaggage ||
-    Object.entries(parsedArrivalInfoBaggage).length === 0 ||
-    parsedArrivalInfoBaggage === 0
-  ) {
-    totalPassengers = parsedDataToFilter.countAdult + parsedDataToFilter.countNiños + parsedDataToFilter.countNiños;
-  } else {
-    totalPassengers = (parsedDataToFilter.countAdult + parsedDataToFilter.countNiños + parsedDataToFilter.countNiños) * 2;
-  }
+  // if (
+  //   !parsedArrivalInfoBaggage ||
+  //   Object.entries(parsedArrivalInfoBaggage).length === 0 ||
+  //   parsedArrivalInfoBaggage === 0
+  // ) {
+  //   totalPassengers = parsedDataToFilter.countAdult + parsedDataToFilter.countNiños + parsedDataToFilter.countNiños;
+  // } else {
+  //   totalPassengers = (parsedDataToFilter.countAdult + parsedDataToFilter.countNiños + parsedDataToFilter.countNiños) * 2;
+  // }
 
-  console.log('total pasajeros permitidos', totalPassengers);
+
  
 
-  const MAX_SELECTED_SEATS = totalPassengers; // Número máximo de asientos seleccionados permitidos
+  const MAX_SELECTED_SEATS = selectedSeatCount; // Número máximo de asientos seleccionados permitidos
 
   
   if (selectedSeatCount === MAX_SELECTED_SEATS) {
-    alert('Has seleccionado todos los asientos permitidos');
+   // alert('Has seleccionado todos los asientos permitidos');
   }
 
   

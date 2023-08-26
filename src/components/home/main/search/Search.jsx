@@ -284,7 +284,7 @@ const conditionalToSearch = async () => {
   if (activeButton === 'viajeRedondo') {
 
     try {
-      const response = await axios.get('https://tickets-backend.herokuapp.com/flights', {
+      const response = await axios.get('https://ticketsbackend.onrender.com/flights', {
         params: { ...dataToFilter },
       });
 
@@ -311,7 +311,7 @@ const conditionalToSearch = async () => {
 
 
     try {
-      const response = await axios.get('https://tickets-backend.herokuapp.com/flights', {
+      const response = await axios.get('https://ticketsbackend.onrender.com/flights', {
         params: { ...dataToFilter },
       });
 
