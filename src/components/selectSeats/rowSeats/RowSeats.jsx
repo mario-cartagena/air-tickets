@@ -10,6 +10,7 @@ const RowSeats = ({ number, selectedSeatCount, setSelectedSeatCount }) => {
   const [selectedSeatsByRow, setSelectedSeatsByRow] = useState({});
   const { departureInfoBaggage, arrivalInfoBaggage,parsedArrivalInfoBaggage, parsedDepartureInfoBaggage  } = useContext(AppContext);
   // console.log(parsedDepartureInfoBaggage)  
+  
   const flighToFilter = parsedArrivalInfoBaggage.flightId
   const flightFiltered = flights.find((e) => e.id == flighToFilter)
  
@@ -17,7 +18,7 @@ const RowSeats = ({ number, selectedSeatCount, setSelectedSeatCount }) => {
     // console.log(flights)
     flights.forEach((item) => {
       // console.log(item.id);
-      const result = flightFiltered.seats.find((element) => element.id === key);
+      const result = flightFiltered?.seats?.find((element) => element.id === key);
       if (result && result.status) {
         if (result.status.available) {
           setSeatStatuses((prevStatuses) => ({

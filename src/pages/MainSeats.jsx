@@ -47,7 +47,7 @@ const MainSeats = () => {
     <div className='seats'>
       <div className="seats__left">
         <div className='info__header'>
-          <TitleDetails name={'salida'} date={parsedDataToFilter.dateDepartureSelected} departure={parsedDataToFilter.selectedDepartureAirport} arrival={parsedDataToFilter.selectedArrivalAirport} />
+          <TitleDetails name={'salida'} date={parsedDataToFilter?.dateDepartureSelected} departure={parsedDataToFilter?.selectedDepartureAirport} arrival={parsedDataToFilter?.selectedArrivalAirport} />
           <ButtonEditFlight onClick={handleToHome} />
         </div>
         <SelectSeats />

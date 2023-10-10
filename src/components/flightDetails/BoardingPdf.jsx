@@ -7,14 +7,13 @@ const BoardingPdf = () => {
 
   const storedresponseBookingConfirmed = sessionStorage.getItem('responseBookingConfirmed');
   const bookingConfirmed = JSON.parse(storedresponseBookingConfirmed);
-  if (!bookingConfirmed ) {
-    // Handle the case when the necessary data is not available
+  if (!bookingConfirmed || !Array.isArray(bookingConfirmed)) {
+    // Handle the case when the necessary data is not available or not in the expected format
     return null;
-    
-  } 
+  }
 
 
-  console.log(bookingConfirmed);
+  // console.log(bookingConfirmed);
 
 
 const styles = StyleSheet.create({
@@ -219,28 +218,29 @@ const styles = StyleSheet.create({
 
 const data = [
   ['N° Vuelo', 'Origen', 'Destino', 'Fecha de Salida', 'Hora', 'Fecha de Llegada', 'Hora',],
-  [bookingConfirmed[0].baggageDepartureInfo.data[0].flight_code, bookingConfirmed[0].baggageDepartureInfo.data[0].departure_airport.city, bookingConfirmed[0].baggageDepartureInfo.data[0].arrival_airport.city, bookingConfirmed[0].baggageDepartureInfo.data[0].departure_date, bookingConfirmed[0].baggageDepartureInfo.data[0].departure_time, bookingConfirmed[0].baggageDepartureInfo.data[0].arrival_date, bookingConfirmed[0].baggageDepartureInfo.data[0].arrival_time],
+  [bookingConfirmed?.[0].baggageDepartureInfo.data?.[0].flight_code, bookingConfirmed?.[0].baggageDepartureInfo.data?.[0].departure_airport.city, bookingConfirmed?.[0].baggageDepartureInfo.data?.[0].arrival_airport.city, bookingConfirmed?.[0].baggageDepartureInfo.data?.[0].departure_date, bookingConfirmed?.[0].baggageDepartureInfo.data?.[0].departure_time, bookingConfirmed?.[0].baggageDepartureInfo.data?.[0].arrival_date, bookingConfirmed?.[0].baggageDepartureInfo.data?.[0].arrival_time],
   
-  ...(bookingConfirmed[0].baggageArrivalInfo ? [
+  ...(bookingConfirmed?.[0].baggageArrivalInfo ? [
     [
-      bookingConfirmed[0].baggageArrivalInfo.data[0].flight_code,
-      bookingConfirmed[0].baggageArrivalInfo.data[0].departure_airport.city,
-      bookingConfirmed[0].baggageArrivalInfo.data[0].arrival_airport.city,
-      bookingConfirmed[0].baggageArrivalInfo.data[0].departure_date,
-      bookingConfirmed[0].baggageArrivalInfo.data[0].departure_time,
-      bookingConfirmed[0].baggageArrivalInfo.data[0].arrival_date,
-      bookingConfirmed[0].baggageArrivalInfo.data[0].arrival_time
+      bookingConfirmed?.[0].baggageArrivalInfo.data?.[0].flight_code,
+      bookingConfirmed?.[0].baggageArrivalInfo.data?.[0].departure_airport.city,
+      bookingConfirmed?.[0].baggageArrivalInfo.data?.[0].arrival_airport.city,
+      bookingConfirmed?.[0].baggageArrivalInfo.data?.[0].departure_date,
+      bookingConfirmed?.[0].baggageArrivalInfo.data?.[0].departure_time,
+      bookingConfirmed?.[0].baggageArrivalInfo.data?.[0].arrival_date,
+      bookingConfirmed?.[0].baggageArrivalInfo.data?.[0].arrival_time
     ]
   ] : [])
 ];
 
-const nombrePasajero = bookingConfirmed[0].passengerInfoBooking[0].nombre
+// const nombrePasajero = bookingConfirmed[0].passengerInfoBooking[0].nombre
 
+console.log(bookingConfirmed?.[0].passengerInfoBooking);
 
 const dataPassenger = [['Nombre de Pasajero', 'Documento de Identidad']];
 
-for (let i = 0; i < bookingConfirmed[0].passengerInfoBooking.length; i++) {
-  const passenger = bookingConfirmed[0].passengerInfoBooking[i];
+for (let i = 0; i < bookingConfirmed?.[0].passengerInfoBooking?.length; i++) {
+  const passenger = bookingConfirmed?.[0].passengerInfoBooking?.[i];
   const nombrePasajero = passenger.nombre;
   const documentoIdentidad = passenger.numeroDocumento;
   dataPassenger.push([nombrePasajero, documentoIdentidad]);
@@ -251,7 +251,7 @@ for (let i = 0; i < bookingConfirmed[0].passengerInfoBooking.length; i++) {
 // Utiliza `dataPassenger` en tu estructura de React PDF
 
 
-let ticketBookings = bookingConfirmed.map((e) => (
+let ticketBookings = bookingConfirmed?.map((e) => (
 
     <Page size="A4" style={styles.page}>
       <View style={styles.container}>
